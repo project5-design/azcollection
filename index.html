@@ -1,0 +1,3309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AZ Collection — Fashion Designer</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      /* ========== RESET & VARIABLES ========== */
+      :root {
+        --black: #b5005b;
+        --white: #fff5f8;
+        --off-white: #fce4ec;
+        --gold: #e91e8c;
+        --gold-light: #f06dbf;
+        --gold-dark: #9c1260;
+        --gold-glow: rgba(233, 30, 140, 0.15);
+        --gray-100: #fce4ec;
+        --gray-200: #f8bbd0;
+        --gray-400: #ce93b8;
+        --gray-600: #8d4a6e;
+        --shadow-sm: 0 2px 16px rgba(181, 0, 91, 0.07);
+        --shadow-md: 0 8px 40px rgba(181, 0, 91, 0.13);
+        --shadow-lg: 0 24px 64px rgba(181, 0, 91, 0.18);
+        --r: 3px;
+        --ease: cubic-bezier(0.4, 0, 0.2, 1);
+        --t: 0.35s;
+        --nav-h: 72px;
+        --serif: "Cormorant Garamond", Georgia, serif;
+        --sans: "Montserrat", sans-serif;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+        font-size: 16px;
+      }
+      body {
+        font-family: var(--sans);
+        background: var(--white);
+        color: var(--black);
+        overflow-x: hidden;
+        line-height: 1.7;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+        object-fit: cover;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      ul {
+        list-style: none;
+      }
+      button {
+        cursor: pointer;
+        border: none;
+        background: none;
+        font-family: var(--sans);
+      }
+      input,
+      textarea {
+        font-family: var(--sans);
+      }
+
+      /* ========== SCROLLBAR ========== */
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--gray-100);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--gold);
+        border-radius: 4px;
+      }
+
+      /* ========== BUTTONS ========== */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 13px 32px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        border-radius: var(--r);
+        transition: var(--t) var(--ease);
+        cursor: pointer;
+        border: 1px solid transparent;
+      }
+      .btn-gold {
+        background: var(--gold);
+        color: var(--white);
+        border-color: var(--gold);
+      }
+      .btn-gold:hover {
+        background: var(--gold-dark);
+        border-color: var(--gold-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(233, 30, 140, 0.35);
+      }
+      .btn-outline {
+        background: transparent;
+        color: var(--black);
+        border-color: var(--black);
+      }
+      .btn-outline:hover {
+        background: var(--black);
+        color: var(--white);
+        transform: translateY(-2px);
+      }
+      .btn-white {
+        background: var(--white);
+        color: var(--black);
+        border-color: var(--white);
+      }
+      .btn-white:hover {
+        background: var(--gold);
+        color: var(--white);
+        border-color: var(--gold);
+      }
+      .w-full {
+        width: 100%;
+        justify-content: center;
+      }
+
+      /* ========== NAVBAR ========== */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 900;
+        height: var(--nav-h);
+        background: rgba(255, 245, 248, 0.97);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+      .navbar.scrolled {
+        border-color: var(--gray-200);
+        box-shadow: var(--shadow-sm);
+      }
+      .nav-wrap {
+        max-width: 1340px;
+        margin: 0 auto;
+        padding: 0 28px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      /* Logo */
+      .logo {
+        display: flex;
+        flex-direction: column;
+        line-height: 1;
+        user-select: none;
+      }
+      .logo-az {
+        font-family: var(--serif);
+        font-size: 2rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        color: var(--black);
+      }
+      .logo-sub {
+        font-size: 0.58rem;
+        font-weight: 400;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-top: -3px;
+      }
+      /* Nav links */
+      .nav-links {
+        display: flex;
+        gap: 34px;
+        align-items: center;
+      }
+      .nav-a {
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--gray-600);
+        position: relative;
+        padding-bottom: 3px;
+        transition: color var(--t);
+      }
+      .nav-a::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--gold);
+        transition: width var(--t) var(--ease);
+      }
+      .nav-a:hover,
+      .nav-a.active {
+        color: var(--black);
+      }
+      .nav-a:hover::after,
+      .nav-a.active::after {
+        width: 100%;
+      }
+      /* Actions */
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .icon-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        color: var(--black);
+        transition: background var(--t), color var(--t);
+        position: relative;
+      }
+      .icon-btn:hover {
+        background: var(--gray-100);
+        color: var(--gold);
+      }
+      .cart-badge {
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        background: var(--gold);
+        color: var(--white);
+        font-size: 0.55rem;
+        font-weight: 700;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: scale(0);
+        transition: 0.25s;
+      }
+      .cart-badge.show {
+        opacity: 1;
+        transform: scale(1);
+      }
+      /* Hamburger */
+      .burger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        padding: 6px;
+      }
+      .burger span {
+        display: block;
+        width: 22px;
+        height: 1.5px;
+        background: var(--black);
+        transition: var(--t);
+      }
+      .burger.open span:nth-child(1) {
+        transform: translateY(6.5px) rotate(45deg);
+      }
+      .burger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .burger.open span:nth-child(3) {
+        transform: translateY(-6.5px) rotate(-45deg);
+      }
+      /* Mobile nav drawer */
+      .mobile-nav {
+        position: fixed;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        background: var(--white);
+        z-index: 899;
+        max-height: 0;
+        overflow: hidden;
+        border-bottom: 1px solid transparent;
+        transition: max-height 0.4s var(--ease), border-color 0.3s;
+      }
+      .mobile-nav.open {
+        max-height: 360px;
+        border-color: var(--gray-200);
+      }
+      .mobile-nav a {
+        display: block;
+        padding: 15px 28px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--gray-600);
+        border-bottom: 1px solid var(--gray-100);
+        transition: color var(--t), background var(--t);
+      }
+      .mobile-nav a:hover {
+        color: var(--black);
+        background: var(--gray-100);
+      }
+      /* Search */
+      .search-drop {
+        max-height: 0;
+        overflow: hidden;
+        border-bottom: 1px solid transparent;
+        transition: max-height 0.4s var(--ease), border-color 0.3s;
+      }
+      .search-drop.open {
+        max-height: 72px;
+        border-color: var(--gray-200);
+      }
+      .search-inner {
+        max-width: 1340px;
+        margin: 0 auto;
+        padding: 14px 28px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .search-inner input {
+        flex: 1;
+        border: none;
+        border-bottom: 1px solid var(--gray-200);
+        outline: none;
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 1rem;
+        color: var(--black);
+        background: transparent;
+        padding: 5px 0;
+        transition: border-color 0.25s;
+      }
+      .search-inner input:focus {
+        border-color: var(--gold);
+      }
+      .search-inner input::placeholder {
+        color: var(--gray-400);
+      }
+      .search-x {
+        color: var(--gray-400);
+        font-size: 0.9rem;
+        transition: color var(--t);
+      }
+      .search-x:hover {
+        color: var(--black);
+      }
+
+      /* ========== HERO ========== */
+      .hero {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: #1a001a;
+      }
+
+      /* ── Video background ── */
+      .hero-video-wrap {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+      }
+      .hero-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+      }
+      /* Pink-tinted dark overlay */
+      .hero-video-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(90, 0, 45, 0.72) 0%,
+          rgba(181, 0, 91, 0.45) 50%,
+          rgba(30, 0, 20, 0.78) 100%
+        );
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: radial-gradient(
+            ellipse 70% 55% at 65% 35%,
+            rgba(233, 30, 140, 0.18) 0%,
+            transparent 65%
+          ),
+          repeating-linear-gradient(
+            45deg,
+            transparent 0,
+            transparent 55px,
+            rgba(233, 30, 140, 0.03) 55px,
+            rgba(233, 30, 140, 0.03) 56px
+          );
+        pointer-events: none;
+      }
+      /* Animated orb */
+      .hero-orb {
+        position: absolute;
+        z-index: 2;
+        width: 520px;
+        height: 520px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(233, 30, 140, 0.22) 0%,
+          transparent 70%
+        );
+        top: 50%;
+        left: 62%;
+        transform: translate(-50%, -50%);
+        animation: orbFloat 8s ease-in-out infinite;
+        pointer-events: none;
+      }
+      @keyframes orbFloat {
+        0%,
+        100% {
+          transform: translate(-50%, -50%) scale(1);
+        }
+        50% {
+          transform: translate(-50%, -52%) scale(1.06);
+        }
+      }
+      /* Diagonal lines deco */
+      .hero-lines {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .hero-lines::before,
+      .hero-lines::after {
+        content: "";
+        position: absolute;
+        width: 1px;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(233, 30, 140, 0.35),
+          transparent
+        );
+      }
+      .hero-lines::before {
+        height: 60%;
+        top: 20%;
+        left: 20%;
+        animation: lineFade 4s ease-in-out infinite;
+      }
+      .hero-lines::after {
+        height: 40%;
+        top: 30%;
+        right: 25%;
+        animation: lineFade 4s 2s ease-in-out infinite;
+      }
+      @keyframes lineFade {
+        0%,
+        100% {
+          opacity: 0.3;
+        }
+        50% {
+          opacity: 0.9;
+        }
+      }
+      .hero-content {
+        position: relative;
+        z-index: 3;
+        text-align: center;
+        padding: 0 24px;
+        max-width: 800px;
+      }
+      .hero-eyebrow {
+        font-size: 0.62rem;
+        letter-spacing: 0.4em;
+        text-transform: uppercase;
+        color: var(--gold-light);
+        margin-bottom: 24px;
+        opacity: 0;
+        animation: riseUp 0.9s 0.1s var(--ease) forwards;
+      }
+      .hero-title {
+        font-family: var(--serif);
+        font-size: clamp(3.8rem, 10vw, 8.5rem);
+        font-weight: 300;
+        color: #fff0f6;
+        line-height: 1.02;
+        margin-bottom: 26px;
+        opacity: 0;
+        animation: riseUp 0.9s 0.2s var(--ease) forwards;
+      }
+      .hero-title em {
+        font-style: italic;
+        color: var(--gold);
+      }
+      .hero-sub {
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255, 220, 240, 0.7);
+        margin-bottom: 52px;
+        opacity: 0;
+        animation: riseUp 0.9s 0.35s var(--ease) forwards;
+      }
+      .hero-ctas {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+        opacity: 0;
+        animation: riseUp 0.9s 0.5s var(--ease) forwards;
+      }
+      @keyframes riseUp {
+        from {
+          opacity: 0;
+          transform: translateY(36px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      /* Scroll hint */
+      .scroll-hint {
+        position: absolute;
+        bottom: 36px;
+        left: 50%;
+        z-index: 3;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        opacity: 0;
+        animation: riseUp 1s 0.9s var(--ease) forwards;
+      }
+      .scroll-hint span {
+        font-size: 0.55rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: rgba(255, 200, 230, 0.55);
+      }
+      .scroll-line {
+        width: 1px;
+        height: 48px;
+        background: linear-gradient(
+          to bottom,
+          rgba(233, 30, 140, 0.7),
+          transparent
+        );
+        animation: pulse 2.2s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.4;
+          transform: scaleY(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scaleY(1.12);
+        }
+      }
+
+      /* ========== TICKER ========== */
+      .ticker {
+        background: #e91e8c;
+        overflow: hidden;
+        padding: 13px 0;
+      }
+      .ticker-track {
+        display: flex;
+        gap: 36px;
+        white-space: nowrap;
+        animation: ticker 24s linear infinite;
+        font-size: 0.62rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.75);
+      }
+      .ticker-track .sep {
+        color: rgba(255, 255, 255, 0.9);
+      }
+      @keyframes ticker {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* ========== SECTION COMMONS ========== */
+      .sec {
+        padding: 100px 28px;
+      }
+      .sec-inner {
+        max-width: 1340px;
+        margin: 0 auto;
+      }
+      .sec-head {
+        text-align: center;
+        margin-bottom: 58px;
+      }
+      .sec-pre {
+        font-size: 0.6rem;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 10px;
+      }
+      .sec-title {
+        font-family: var(--serif);
+        font-size: clamp(2rem, 5vw, 3.4rem);
+        font-weight: 400;
+        line-height: 1.15;
+      }
+      .sec-title em {
+        font-style: italic;
+        color: var(--gold);
+      }
+
+      /* ========== CATEGORIES ========== */
+      .cat-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+      .cat-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--r);
+        cursor: pointer;
+        background: var(--gray-100);
+        transition: transform var(--t) var(--ease), box-shadow var(--t);
+      }
+      .cat-card:hover {
+        transform: translateY(-7px);
+        box-shadow: var(--shadow-md);
+      }
+      .cat-img {
+        aspect-ratio: 3/4;
+        overflow: hidden;
+        background: linear-gradient(135deg, var(--gray-100), var(--gray-200));
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        color: var(--gray-400);
+        font-size: 2.6rem;
+        transition: transform 0.5s var(--ease);
+      }
+      .cat-card:hover .cat-img {
+        transform: scale(1.05);
+      }
+      /* Replace cat-img div with img tag later */
+      .cat-img img {
+        width: 100%;
+        height: 100%;
+      }
+      .cat-foot {
+        padding: 18px;
+        background: var(--white);
+        border-top: 2px solid transparent;
+        transition: border-color var(--t);
+      }
+      .cat-card:hover .cat-foot {
+        border-color: var(--gold);
+      }
+      .cat-foot h3 {
+        font-family: var(--serif);
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-bottom: 3px;
+      }
+      .cat-foot span {
+        font-size: 0.6rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: gap var(--t);
+      }
+      .cat-card:hover .cat-foot span {
+        gap: 11px;
+      }
+
+      /* ========== PRODUCTS ========== */
+      .filter-bar {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 52px;
+      }
+      .f-btn {
+        padding: 9px 22px;
+        font-size: 0.64rem;
+        font-weight: 500;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        border-radius: 30px;
+        border: 1px solid var(--gray-200);
+        background: var(--white);
+        color: var(--gray-600);
+        transition: var(--t);
+      }
+      .f-btn:hover,
+      .f-btn.active {
+        background: var(--black);
+        color: var(--white);
+        border-color: var(--black);
+      }
+      .prod-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 26px;
+      }
+      .prod-card {
+        border-radius: var(--r);
+        overflow: hidden;
+        background: var(--white);
+        transition: transform var(--t) var(--ease), box-shadow var(--t);
+        position: relative;
+      }
+      .prod-card:hover {
+        transform: translateY(-9px);
+        box-shadow: var(--shadow-lg);
+      }
+      .prod-card.hide {
+        display: none;
+      }
+      .prod-img {
+        position: relative;
+        aspect-ratio: 3/4;
+        overflow: hidden;
+        background: var(--gray-100);
+      }
+      /* Placeholder shown when no real image */
+      .prod-ph {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: var(--gray-400);
+        font-size: 2rem;
+        background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+        transition: transform 0.5s var(--ease);
+      }
+      .prod-ph span {
+        font-size: 0.58rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gray-400);
+      }
+      .prod-card:hover .prod-ph {
+        transform: scale(1.06);
+      }
+      /* When a real image is placed */
+      .prod-img img {
+        width: 100%;
+        height: 100%;
+        transition: transform 0.5s var(--ease);
+      }
+      .prod-card:hover .prod-img img {
+        transform: scale(1.06);
+      }
+      .prod-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: var(--black);
+        color: var(--white);
+        font-size: 0.55rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: 2px;
+        z-index: 2;
+      }
+      .prod-badge.gold-badge {
+        background: var(--gold);
+      }
+      .prod-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(181, 0, 91, 0.45);
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding-bottom: 22px;
+        opacity: 0;
+        transition: opacity var(--t);
+        z-index: 3;
+      }
+      .prod-card:hover .prod-overlay {
+        opacity: 1;
+      }
+      .q-add {
+        background: var(--white);
+        color: var(--black);
+        font-size: 0.64rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 10px 20px;
+        border-radius: var(--r);
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        transform: translateY(12px);
+        transition: transform 0.3s var(--ease), background 0.2s, color 0.2s;
+      }
+      .prod-card:hover .q-add {
+        transform: translateY(0);
+      }
+      .q-add:hover {
+        background: var(--gold);
+        color: var(--white);
+      }
+      /* Info */
+      .prod-info {
+        padding: 16px 16px 20px;
+        border-top: 1px solid var(--gray-100);
+      }
+      .prod-cat-lbl {
+        font-size: 0.57rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 3px;
+      }
+      .prod-name {
+        font-family: var(--serif);
+        font-size: 1.08rem;
+        font-weight: 500;
+        line-height: 1.3;
+        margin-bottom: 6px;
+      }
+      .prod-price {
+        font-size: 0.84rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        min-height: 18px;
+        margin-bottom: 13px;
+      }
+      .prod-price:empty::before {
+        content: "—";
+        color: var(--gray-400);
+        font-weight: 300;
+      }
+      .add-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 0.64rem;
+        font-weight: 600;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--black);
+        border: 1px solid var(--black);
+        border-radius: var(--r);
+        background: var(--white);
+        transition: var(--t);
+      }
+      .add-btn:hover {
+        background: var(--black);
+        color: var(--white);
+      }
+      .no-results {
+        text-align: center;
+        color: var(--gray-400);
+        font-size: 0.85rem;
+        letter-spacing: 0.1em;
+        margin-top: 48px;
+        display: none;
+      }
+
+      /* ========== COLOR SWATCHES ========== */
+      .color-swatches {
+        display: flex;
+        gap: 7px;
+        align-items: center;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+      }
+      .color-dot {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        position: relative;
+        flex-shrink: 0;
+      }
+      .color-dot:hover {
+        transform: scale(1.2);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+      }
+      .color-dot.selected {
+        border-color: var(--black);
+        transform: scale(1.18);
+        box-shadow: 0 0 0 1px var(--white), 0 0 0 3px var(--black);
+      }
+      /* Animated placeholder when color selected */
+      .prod-ph {
+        transition: background 0.4s var(--ease), color 0.3s;
+      }
+      .prod-ph.colored {
+        color: rgba(255, 255, 255, 0.55) !important;
+      }
+      .prod-ph.colored span {
+        color: rgba(255, 255, 255, 0.45) !important;
+      }
+
+      /* ========== ABOUT ========== */
+      .about-sec {
+        background: var(--off-white);
+      }
+      .about-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .about-visual {
+        position: relative;
+      }
+      .about-ph {
+        aspect-ratio: 3/4;
+        border-radius: var(--r);
+        background: linear-gradient(135deg, var(--gray-200), var(--gray-100));
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        color: var(--gray-400);
+        font-size: 2.5rem;
+        position: relative;
+        z-index: 1;
+      }
+      .about-ph span {
+        font-size: 0.62rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+      .about-ph img {
+        border-radius: var(--r);
+      }
+      .about-box {
+        position: absolute;
+        bottom: -18px;
+        right: -18px;
+        width: 58%;
+        height: 56%;
+        border: 2px solid var(--gold);
+        border-radius: var(--r);
+        z-index: 0;
+        opacity: 0.35;
+      }
+      .about-txt .sec-title {
+        text-align: left;
+        margin-bottom: 22px;
+      }
+      .about-txt p {
+        font-size: 0.86rem;
+        color: var(--gray-600);
+        line-height: 1.9;
+        margin-bottom: 16px;
+      }
+      .about-txt .btn {
+        margin-top: 14px;
+      }
+      /* Stats row */
+      .stats {
+        display: flex;
+        gap: 32px;
+        margin: 28px 0;
+      }
+      .stat {
+        text-align: center;
+      }
+      .stat-n {
+        font-family: var(--serif);
+        font-size: 2.2rem;
+        font-weight: 600;
+        color: var(--gold);
+        line-height: 1;
+      }
+      .stat-l {
+        font-size: 0.6rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gray-600);
+        margin-top: 4px;
+      }
+
+      /* ========== CONTACT ========== */
+      .contact-inner {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 60px;
+        align-items: start;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .c-item {
+        display: flex;
+        gap: 18px;
+        align-items: flex-start;
+        margin-bottom: 30px;
+      }
+      .c-item i {
+        color: var(--gold);
+        font-size: 1rem;
+        margin-top: 4px;
+        min-width: 20px;
+      }
+      .c-item h4 {
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+      .c-item p {
+        font-size: 0.83rem;
+        color: var(--gray-600);
+        min-height: 16px;
+      }
+      .c-item p:empty::before {
+        content: "Add your info here";
+        color: var(--gray-400);
+        font-style: italic;
+      }
+      .c-social {
+        display: flex;
+        gap: 10px;
+        margin-top: 4px;
+      }
+      .c-social a {
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--gray-200);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        transition: var(--t);
+      }
+      .c-social a:hover {
+        background: var(--black);
+        color: var(--white);
+        border-color: var(--black);
+      }
+      .c-form {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .f-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .f-ctrl {
+        width: 100%;
+        padding: 13px 15px;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--r);
+        font-size: 0.83rem;
+        color: var(--black);
+        background: var(--white);
+        outline: none;
+        transition: border-color 0.25s;
+      }
+      .f-ctrl:focus {
+        border-color: var(--gold);
+      }
+      textarea.f-ctrl {
+        resize: vertical;
+      }
+
+      /* ========== FOOTER ========== */
+      footer {
+        background: var(--black);
+        color: var(--white);
+        padding: 80px 28px 0;
+      }
+      .foot-inner {
+        max-width: 1340px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.6fr 1fr 1fr 1.6fr;
+        gap: 48px;
+        padding-bottom: 56px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      }
+      .foot-logo .logo-az {
+        color: var(--white);
+      }
+      .foot-logo p {
+        font-size: 0.78rem;
+        color: rgba(255, 255, 255, 0.38);
+        line-height: 1.75;
+        margin: 14px 0 22px;
+      }
+      .foot-social {
+        display: flex;
+        gap: 10px;
+      }
+      .foot-social a {
+        width: 34px;
+        height: 34px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.45);
+        transition: var(--t);
+      }
+      .foot-social a:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+      .foot-col h4 {
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+      }
+      .foot-col ul {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .foot-col ul a {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.38);
+        transition: color var(--t);
+      }
+      .foot-col ul a:hover {
+        color: var(--gold);
+      }
+      .foot-col > p {
+        font-size: 0.78rem;
+        color: rgba(255, 255, 255, 0.38);
+        line-height: 1.7;
+        margin-bottom: 14px;
+      }
+      .nl-wrap {
+        display: flex;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: var(--r);
+        overflow: hidden;
+      }
+      .nl-wrap input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        padding: 11px 13px;
+        font-size: 0.76rem;
+        color: var(--white);
+      }
+      .nl-wrap input::placeholder {
+        color: rgba(255, 255, 255, 0.28);
+      }
+      .nl-wrap button {
+        background: var(--gold);
+        color: var(--white);
+        padding: 0 15px;
+        font-size: 0.82rem;
+        transition: background var(--t);
+      }
+      .nl-wrap button:hover {
+        background: var(--gold-dark);
+      }
+      .foot-bottom {
+        max-width: 1340px;
+        margin: 0 auto;
+        padding: 22px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.68rem;
+        color: rgba(255, 255, 255, 0.22);
+        letter-spacing: 0.04em;
+      }
+      .foot-bottom i {
+        color: var(--gold);
+        margin: 0 3px;
+      }
+
+      /* ========== CART SIDEBAR ========== */
+      .cart-mask {
+        position: fixed;
+        inset: 0;
+        background: rgba(181, 0, 91, 0.35);
+        z-index: 1100;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.35s;
+      }
+      .cart-mask.on {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .cart-side {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 430px;
+        max-width: 100vw;
+        height: 100vh;
+        background: var(--white);
+        z-index: 1101;
+        display: flex;
+        flex-direction: column;
+        transform: translateX(100%);
+        transition: transform 0.42s var(--ease);
+        box-shadow: var(--shadow-lg);
+      }
+      .cart-side.on {
+        transform: translateX(0);
+      }
+      .cart-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 22px 26px;
+        border-bottom: 1px solid var(--gray-200);
+      }
+      .cart-top h2 {
+        font-family: var(--serif);
+        font-size: 1.35rem;
+        font-weight: 500;
+      }
+      .cart-top span {
+        color: var(--gray-400);
+        font-size: 0.95rem;
+      }
+      .cart-close-btn {
+        font-size: 1rem;
+        color: var(--gray-400);
+        transition: color var(--t);
+      }
+      .cart-close-btn:hover {
+        color: var(--black);
+      }
+      .cart-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 22px 26px;
+      }
+      .cart-empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        min-height: 280px;
+        color: var(--gray-400);
+        text-align: center;
+      }
+      .cart-empty-state i {
+        font-size: 3rem;
+        color: var(--gray-200);
+      }
+      .cart-empty-state p {
+        font-size: 0.82rem;
+        letter-spacing: 0.05em;
+      }
+      .cart-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .c-item-row {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        padding-bottom: 18px;
+        border-bottom: 1px solid var(--gray-100);
+        animation: slideIn 0.3s var(--ease);
+      }
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      .c-thumb {
+        width: 70px;
+        height: 88px;
+        border-radius: var(--r);
+        background: var(--gray-100);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: var(--gray-400);
+        overflow: hidden;
+      }
+      .c-thumb img {
+        width: 100%;
+        height: 100%;
+      }
+      .c-deets {
+        flex: 1;
+      }
+      .c-name {
+        font-family: var(--serif);
+        font-size: 1rem;
+        font-weight: 500;
+        margin-bottom: 3px;
+      }
+      .c-price {
+        font-size: 0.75rem;
+        color: var(--gray-400);
+        margin-bottom: 9px;
+      }
+      .qty-row {
+        display: flex;
+        align-items: center;
+        border: 1px solid var(--gray-200);
+        border-radius: 2px;
+        width: fit-content;
+      }
+      .qty-b {
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        transition: background var(--t);
+      }
+      .qty-b:hover {
+        background: var(--gray-100);
+      }
+      .qty-n {
+        width: 30px;
+        text-align: center;
+        font-size: 0.78rem;
+        font-weight: 600;
+        border-left: 1px solid var(--gray-200);
+        border-right: 1px solid var(--gray-200);
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .rm-btn {
+        font-size: 0.78rem;
+        color: var(--gray-400);
+        padding: 4px;
+        transition: color var(--t);
+      }
+      .rm-btn:hover {
+        color: #c0392b;
+      }
+      .cart-foot {
+        padding: 18px 26px 26px;
+        border-top: 1px solid var(--gray-200);
+      }
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--serif);
+        font-size: 1.15rem;
+        font-weight: 500;
+        margin-bottom: 6px;
+      }
+      .cart-note {
+        font-size: 0.64rem;
+        color: var(--gray-400);
+        letter-spacing: 0.05em;
+        margin-bottom: 14px;
+      }
+
+      /* ========== TOAST ========== */
+      .toast {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%) translateY(16px);
+        background: var(--black);
+        color: var(--white);
+        padding: 11px 22px;
+        border-radius: 40px;
+        font-size: 0.74rem;
+        letter-spacing: 0.06em;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s, transform 0.3s;
+        white-space: nowrap;
+        z-index: 9999;
+        border-left: 3px solid var(--gold);
+      }
+      .toast.on {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      /* ========== SCROLL ANIMATIONS ========== */
+      .reveal {
+        opacity: 0;
+        transform: translateY(26px);
+        transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ========== RESPONSIVE ========== */
+      /* ========== RESPONSIVE ========== */
+
+      /* Tablet landscape */
+      @media (max-width: 1100px) {
+        .prod-grid { grid-template-columns: repeat(3, 1fr); }
+        .cat-grid  { grid-template-columns: repeat(2, 1fr); }
+        .foot-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
+      }
+
+      /* Tablet portrait */
+      @media (max-width: 900px) {
+        .nav-links { display: none; }
+        .burger    { display: flex; }
+        .about-inner { grid-template-columns: 1fr; gap: 48px; }
+        .about-visual { max-width: 400px; }
+        .contact-inner { grid-template-columns: 1fr; }
+        .prod-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+        .f-row     { grid-template-columns: 1fr; }
+        .hero-title { font-size: clamp(3rem, 11vw, 6rem); }
+        .sec       { padding: 80px 24px; }
+      }
+
+      /* Phone */
+      @media (max-width: 600px) {
+        :root { --nav-h: 60px; }
+        .sec { padding: 60px 14px; }
+
+        /* Navbar */
+        .nav-wrap  { padding: 0 14px; }
+        .icon-btn  { width: 36px; height: 36px; font-size: 0.9rem; }
+
+        /* Hero */
+        .hero-title   { font-size: clamp(2.6rem, 13vw, 4.5rem); margin-bottom: 16px; }
+        .hero-sub     { font-size: 0.65rem; margin-bottom: 32px; }
+        .hero-eyebrow { font-size: 0.55rem; margin-bottom: 16px; }
+        .hero-ctas    { flex-direction: column; align-items: center; gap: 12px; }
+        .btn          { padding: 13px 28px; font-size: 0.65rem; width: 100%; max-width: 260px; justify-content: center; }
+
+        /* Products */
+        .prod-grid  { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .prod-info  { padding: 10px 10px 14px; }
+        .prod-name  { font-size: 0.9rem; }
+        .prod-price { font-size: 0.78rem; margin-bottom: 9px; }
+        .prod-cat-lbl { font-size: 0.5rem; }
+        .add-btn    { padding: 10px 6px; font-size: 0.58rem; letter-spacing: 0.08em; min-height: 40px; }
+        .q-add      { padding: 10px 16px; font-size: 0.6rem; min-height: 40px; }
+        .color-dot  { width: 20px !important; height: 20px !important; }
+
+        /* Filters */
+        .f-bar { gap: 6px; flex-wrap: wrap; justify-content: center; }
+        .f-btn { padding: 8px 14px; font-size: 0.58rem; min-height: 38px; }
+
+        /* Categories */
+        .cat-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+        /* About */
+        .about-visual { max-width: 100%; }
+        .about-ph     { min-height: 260px; }
+
+        /* Titles */
+        .sec-title { font-size: clamp(1.8rem, 7vw, 3rem); }
+
+        /* Stats */
+        .stats    { gap: 14px; flex-wrap: wrap; justify-content: center; }
+        .stat-num { font-size: 2rem; }
+
+        /* Footer */
+        .foot-inner  { grid-template-columns: 1fr; gap: 28px; }
+        .foot-bottom { flex-direction: column; gap: 8px; text-align: center; }
+
+        /* Cart sidebar */
+        .cart-side { width: 100vw; }
+        .cart-head { padding: 16px; }
+        .cart-body { padding: 12px 16px; }
+
+        /* Inputs — prevent iOS auto-zoom */
+        .f-group input,
+        .f-group textarea { font-size: 16px; }
+      }
+
+      /* Very small phones */
+      @media (max-width: 380px) {
+        .prod-grid  { grid-template-columns: 1fr; }
+        .cat-grid   { grid-template-columns: 1fr; }
+        .hero-title { font-size: 2.6rem; }
+      }
+
+      /* Touch devices — replace hover-only interactions */
+      @media (hover: none) {
+        .prod-card:hover  { transform: none; box-shadow: none; }
+        .prod-card:active { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .prod-card:hover  .prod-overlay { opacity: 0; }
+        .prod-card:active .prod-overlay { opacity: 1; }
+        .prod-card:hover  .prod-img img { transform: none; }
+        .prod-card:active .prod-img img { transform: scale(1.04); }
+        .prod-card:hover  .prod-ph      { transform: none; }
+        .add-btn:hover  { background: var(--white); color: var(--black); }
+        .add-btn:active { background: var(--black); color: var(--white); }
+        .cat-card:hover  .cat-img img { transform: none; }
+        .cat-card:active .cat-img img { transform: scale(1.04); }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-wrap">
+        <a href="#home" class="logo">
+          <span class="logo-az">AZ</span>
+          <span class="logo-sub">Collection</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" class="nav-a active">Home</a></li>
+          <li><a href="#shop" class="nav-a">Shop</a></li>
+          <li><a href="#categories" class="nav-a">Categories</a></li>
+          <li><a href="#about" class="nav-a">About</a></li>
+          <li><a href="#contact" class="nav-a">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="icon-btn" id="searchToggle" aria-label="Search">
+            <i class="fas fa-search"></i>
+          </button>
+          <button class="icon-btn" id="cartToggle" aria-label="Cart">
+            <i class="fas fa-shopping-bag"></i>
+            <span class="cart-badge" id="cartBadge">0</span>
+          </button>
+          <button class="burger" id="burger" aria-label="Menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+      <!-- Search drop -->
+      <div class="search-drop" id="searchDrop">
+        <div class="search-inner">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search the collection…"
+            autocomplete="off"
+          />
+          <button class="search-x" id="searchX">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile nav -->
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#home">Home</a>
+      <a href="#shop">Shop</a>
+      <a href="#categories">Categories</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+      <!-- Background Video -->
+      <div class="hero-video-wrap">
+        <video
+          class="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          poster="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1920&q=80"
+        >
+          <!-- Free fashion stock video from Pexels (no login needed) -->
+          <source
+            src="https://videos.pexels.com/video-files/5699419/5699419-uhd_2560_1440_25fps.mp4"
+            type="video/mp4"
+          />
+          <!-- Fallback if video fails to load -->
+          Your browser does not support the video tag.
+        </video>
+        <!-- Dark + pink overlay on top of video -->
+        <div class="hero-video-overlay"></div>
+      </div>
+
+      <div class="hero-orb"></div>
+      <div class="hero-lines"></div>
+
+      <div class="hero-content">
+        <p class="hero-eyebrow">New Season · AZ Collection · 2025</p>
+        <h1 class="hero-title">Wear Your<br /><em>Story</em></h1>
+        <p class="hero-sub">Elevated fashion crafted for the modern woman</p>
+        <div class="hero-ctas">
+          <a href="#shop" class="btn btn-gold"
+            >Shop Now <i class="fas fa-arrow-right"></i
+          ></a>
+          <a href="#about" class="btn btn-white">Our Story</a>
+        </div>
+      </div>
+
+      <div class="scroll-hint">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ===== TICKER ===== -->
+    <div class="ticker">
+      <div class="ticker-track">
+        <span>Free Shipping Over $150</span><span class="sep">◆</span>
+        <span>New Arrivals Every Week</span><span class="sep">◆</span>
+        <span>AZ Collection · Fashion Designer</span><span class="sep">◆</span>
+        <span>Handcrafted with Passion</span><span class="sep">◆</span>
+        <span>Exclusive Limited Pieces</span><span class="sep">◆</span>
+        <span>Free Shipping Over $150</span><span class="sep">◆</span>
+        <span>New Arrivals Every Week</span><span class="sep">◆</span>
+        <span>AZ Collection · Fashion Designer</span><span class="sep">◆</span>
+        <span>Handcrafted with Passion</span><span class="sep">◆</span>
+        <span>Exclusive Limited Pieces</span><span class="sep">◆</span>
+      </div>
+    </div>
+
+    <!-- ===== CATEGORIES ===== -->
+    <section class="sec" id="categories">
+      <div class="sec-inner">
+        <div class="sec-head reveal">
+          <p class="sec-pre">Explore</p>
+          <h2 class="sec-title">Shop by <em>Category</em></h2>
+        </div>
+        <div class="cat-grid">
+          <div class="cat-card reveal" data-filter="women">
+            <div class="cat-img">
+              <!-- Replace this div with: <img src="women.jpg" alt="Women"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class="fas fa-image"></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
+              /> -->
+              <i class="fas fa-female"></i>
+              <span
+                style="
+                  font-size: 0.6rem;
+                  letter-spacing: 0.2em;
+                  text-transform: uppercase;
+                "
+                >stay tuned</span
+              >
+            </div>
+           <!-- <div class="cat-foot">
+              <h3>Top</h3>
+              <span>Explore <i class="fas fa-arrow-right"></i></span>
+            </div>-->
+          </div>
+          <div class="cat-card reveal" data-filter="women">
+            <div class="cat-img">
+              <img
+                src="pde1.jpeg"
+                alt=">Perled'été"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\"fas fa-image\">
+
+              <span
+                style="
+                  font-size: 0.6rem;
+                  letter-spacing: 0.2em;
+                  text-transform: uppercase;
+                "
+              ></span>
+            </div>
+            <div class="cat-foot">
+              <h3>Perle d'été</h3>
+              <span>Explore <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </div>
+          <div class="cat-card reveal" data-filter="robe">
+            <div class="cat-img">
+              <img
+                src="rb1.jpeg"
+                alt=">Perled'été"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\"fas fa-image\">
+
+              <span
+                style="
+                  font-size: 0.6rem;
+                  letter-spacing: 0.2em;
+                  text-transform: uppercase;
+                "
+              ></span>
+            </div>
+            <div class="cat-foot">
+              <h3>Robe chic</h3>
+              <span>Explore <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </div>
+          <div class="cat-card reveal" data-filter="men">
+            <div class="cat-img">
+              <img
+                src="sc1.jpeg"
+                alt=">Perled'été"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\"fas fa-image\">
+
+              <span
+                style="
+                  font-size: 0.6rem;
+                  letter-spacing: 0.2em;
+                  text-transform: uppercase;
+                "
+              ></span>
+            </div>
+            <div class="cat-foot">
+              <h3>Set camélia</h3>
+              <span>Explore <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </div>
+          <div class="cat-card reveal" data-filter="men">
+            <div class="cat-img">
+              <img
+                src="jebba3.png"
+                alt="jebba l'Aid"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\"fas fa-image\">
+
+              <span
+                style="
+                  font-size: 0.6rem;
+                  letter-spacing: 0.2em;
+                  text-transform: uppercase;
+                "
+              ></span>
+            </div>
+            <div class="cat-foot">
+              <h3>jebba l'Aid</h3>
+              <span>Explore <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </div>
+
+          <div class="cat-card reveal" data-filter="shoes">
+            <div class="cat-img">
+              <img
+                src="robe1.jpeg"
+                alt="Robe marine"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\"fas fa-image\">
+            </div>
+            <div class="cat-foot">
+              <h3>Robe marine</h3>
+              <span>Explore <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </div>
+
+          <div class="cat-card reveal" data-filter="accessories">
+            <div class="cat-img">
+              <img
+                src="set1.jpeg"
+                alt="Robe marine"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\"fas fa-image\"></i>
+              <i class="fas fa-female" style="display: none"></i>
+              <span
+                style="
+                  font-size: 0.6rem;
+                  letter-spacing: 0.2em;
+                  text-transform: uppercase;
+                "
+              ></span>
+            </div>
+            <div class="cat-foot">
+              <h3>Set d'été</h3>
+              <span>Explore <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SHOP ===== -->
+    <section class="sec" id="shop" style="background: var(--off-white)">
+      <div class="sec-inner">
+        <div class="sec-head reveal">
+          <p class="sec-pre">Curated</p>
+          <h2 class="sec-title">Our <em>Collection</em></h2>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+          <button class="f-btn active" data-cat="all">All</button>
+          <button class="f-btn" data-cat="women">Perle d'été</button>
+          <button class="f-btn" data-cat="robe">Robe chic</button>
+          <button class="f-btn" data-cat="men">jebba l'Aid</button>
+          <button class="f-btn" data-cat="shoes">Robe marine</button>
+          <button class="f-btn" data-cat="accessories">Set d'été</button>
+          <button class="f-btn " data-cat="setc">setc</button>
+        </div>
+
+        <!-- Products -->
+        <div class="prod-grid" id="prodGrid">
+          <!-- ===== HOW TO ADD YOUR OWN IMAGE =====
+           Replace the <div class="prod-ph">...</div>
+           with: <img src="YOUR-IMAGE.jpg" alt="Product Name"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class="fas fa-image"></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
+              />
+           inside <div class="prod-img">
+      ============================================ -->
+
+          
+          <!-- PERLE D'été-->
+          <div
+            class="prod-card reveal"
+            data-cat="women"
+            data-name="wide-leg trousers"
+          >
+            <div class="prod-img">
+              <div class="prod-ph">
+                <i class="fas fa-image"></i><span><img src="pde1.jpeg" alt=""></span>
+              </div>
+              <div class="prod-badge">NEW</div>
+              <div class="prod-overlay">
+                <button
+                  class="q-add"
+                  data-name="Wide-Leg Trousers"
+                  data-price=""
+                >
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl"></p>
+              <h3 class="prod-name">Perle d'été</h3>
+              <p class="prod-price">59,900dt</p>
+              <div class="color-swatches">
+                
+              </div>
+              <button
+                class="add-btn"
+                data-name="Wide-Leg Trousers"
+                data-price=""
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+          <div
+            class="prod-card reveal"
+            data-cat="women"
+            data-name="wide-leg trousers"
+          >
+            <div class="prod-img">
+              <div class="prod-ph">
+                <i class="fas fa-image"></i><span><img src="pde2.jpeg" alt=""></span>
+              </div>
+              <div class="prod-badge">NEW</div>
+              <div class="prod-overlay">
+                <button
+                  class="q-add"
+                  data-name="Wide-Leg Trousers"
+                  data-price=""
+                >
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl"></p>
+              <h3 class="prod-name">Perle d'été</h3>
+              <p class="prod-price">59,900dt</p>
+              <div class="color-swatches">
+               
+              </div>
+              <button
+                class="add-btn"
+                data-name="Wide-Leg Trousers"
+                data-price=""
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+          <div
+            class="prod-card reveal"
+            data-cat="women"
+            data-name="wide-leg trousers"
+          >
+            <div class="prod-img">
+              <div class="prod-ph">
+                <i class="fas fa-image"></i><span><img src="pde3.jpeg" alt=""></span>
+              </div>
+              <div class="prod-badge">NEW</div>
+              <div class="prod-overlay">
+                <button
+                  class="q-add"
+                  data-name="Wide-Leg Trousers"
+                  data-price=""
+                >
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl"></p>
+              <h3 class="prod-name">Perle d'été</h3>
+              <p class="prod-price">59,900dt</p>
+              <div class="color-swatches">
+               
+              </div>
+              <button
+                class="add-btn"
+                data-name="Wide-Leg Trousers"
+                data-price=""
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+          <div
+            class="prod-card reveal"
+            data-cat="women"
+            data-name="wide-leg trousers"
+          >
+            <div class="prod-img">
+              <div class="prod-ph">
+                <i class="fas fa-image"></i><span><img src="pde4.jpeg" alt=""></span>
+              </div>
+              <div class="prod-badge">NEW</div>
+              <div class="prod-overlay">
+                <button
+                  class="q-add"
+                  data-name="Wide-Leg Trousers"
+                  data-price=""
+                >
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl"></p>
+              <h3 class="prod-name">Perle d'été</h3>
+              <p class="prod-price">59,900dt</p>
+              <div class="color-swatches">
+                
+              </div>
+              <button
+                class="add-btn"
+                data-name="Wide-Leg Trousers"
+                data-price=""
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+          <div
+            class="prod-card reveal"
+            data-cat="women"
+            data-name="wide-leg trousers"
+          >
+            <div class="prod-img">
+              <div class="prod-ph">
+                <i class="fas fa-image"></i><span><img src="pde5.jpeg" alt=""></span>
+              </div>
+              <div class="prod-badge">NEW</div>
+              <div class="prod-overlay">
+                <button
+                  class="q-add"
+                  data-name="Wide-Leg Trousers"
+                  data-price=""
+                >
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl"></p>
+              <h3 class="prod-name">Perle d'été</h3>
+              <p class="prod-price">59,900dt</p>
+              <div class="color-swatches">
+               
+              </div>
+              <button
+                class="add-btn"
+                data-name="Wide-Leg Trousers"
+                data-price=""
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+          <!-- robe chic -->
+          <div
+            class="prod-card reveal"
+            data-cat="robe"
+            data-name="wide-leg trousers"
+          >
+            <div class="prod-img">
+              <div class="prod-ph">
+                <i class="fas fa-image"></i><span><img src="rb2.jpeg" alt=""></span>
+              </div>
+              <div class="prod-badge">NEW</div>
+              <div class="prod-overlay">
+                <button
+                  class="q-add"
+                  data-name="Wide-Leg Trousers"
+                  data-price=""
+                >
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl"></p>
+              <h3 class="prod-name">robe chic</h3>
+              <p class="prod-price">49,900dt</p>
+              <div class="color-swatches">
+                
+              </div>
+              <button
+                class="add-btn"
+                data-name="Wide-Leg Trousers"
+                data-price=""
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+          <div
+            class="prod-card reveal"
+            data-cat="robe"
+            data-name="wide-leg trousers"
+          >
+            <div class="prod-img">
+              <div class="prod-ph">
+                <i class="fas fa-image"></i><span><img src="rb3.jpeg" alt=""></span>
+              </div>
+              <div class="prod-badge">NEW</div>
+              <div class="prod-overlay">
+                <button
+                  class="q-add"
+                  data-name="Wide-Leg Trousers"
+                  data-price=""
+                >
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl"></p>
+              <h3 class="prod-name">robe chic</h3>
+              <p class="prod-price">49,900dt</p>
+              <div class="color-swatches">
+                
+              </div>
+              <button
+                class="add-btn"
+                data-name="Wide-Leg Trousers"
+                data-price=""
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+          <div
+            class="prod-card reveal"
+            data-cat="robe"
+            data-name="wide-leg trousers"
+          >
+            <div class="prod-img">
+              <div class="prod-ph">
+                <i class="fas fa-image"></i><span><img src="rb4.jpeg" alt=""></span>
+              </div>
+              <div class="prod-badge">NEW</div>
+              <div class="prod-overlay">
+                <button
+                  class="q-add"
+                  data-name="Wide-Leg Trousers"
+                  data-price=""
+                >
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl"></p>
+              <h3 class="prod-name">robe chic</h3>
+              <p class="prod-price">49,900dt</p>
+              <div class="color-swatches">
+               
+                
+              </div>
+              <button
+                class="add-btn"
+                data-name="Wide-Leg Trousers"
+                data-price=""
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+          <div
+            class="prod-card reveal"
+            data-cat="robe"
+            data-name="wide-leg trousers"
+          >
+            <div class="prod-img">
+              <div class="prod-ph">
+                <i class="fas fa-image"></i><span><img src="rb1.jpeg" alt=""></span>
+              </div>
+              <div class="prod-badge">NEW</div>
+              <div class="prod-overlay">
+                <button
+                  class="q-add"
+                  data-name="Wide-Leg Trousers"
+                  data-price=""
+                >
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl"></p>
+              <h3 class="prod-name">robe chic</h3>
+              <p class="prod-price">49,900dt</p>
+              <div class="color-swatches">
+                <span
+                  class="color-dot selected"
+                  style="background: #000000"
+                  data-color="#f5f2ed"
+                  data-gradient="linear-gradient(135deg,#fafafa,#e8e4dd)"
+                  title="Cream"
+                ></span>
+                
+              </div>
+              <button
+                class="add-btn"
+                data-name="Wide-Leg Trousers"
+                data-price=""
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div
+            class="prod-card reveal"
+            data-cat="setc"
+            data-name="asymmetric bodysuit"
+          >
+            <div class="prod-img">
+              <div class="prod-ph">
+                <i class="fas fa-image"></i><span><img src="sc1.jpeg" alt=""></span>
+              </div>
+              <div class="prod-badge">NEW</div>
+              <div class="prod-overlay">
+                <button
+                  class="q-add"
+                  data-name="Asymmetric Bodysuit"
+                  data-price=""
+                >
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl"></p>
+              <h3 class="prod-name">set camélia</h3>
+              <p class="prod-price">79,900dt</p>
+              <div class="color-swatches">
+               
+                <span
+                  class="color-dot"
+                  style="background: #f5c2c7"
+                  data-color="#f5c2c7"
+                  data-gradient="linear-gradient(135deg,#fad7db,#e8a0a9)"
+                  title="Blush"
+                ></span>
+                
+              </div>
+              <button
+                class="add-btn"
+                data-name="Asymmetric Bodysuit"
+                data-price=""
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+          <div
+          class="prod-card reveal"
+          data-cat="setc"
+          data-name="asymmetric bodysuit"
+        >
+          <div class="prod-img">
+            <div class="prod-ph">
+              <i class="fas fa-image"></i><span><img src="sc2.jpeg" alt=""></span>
+            </div>
+            <div class="prod-badge">NEW</div>
+            <div class="prod-overlay">
+              <button
+                class="q-add"
+                data-name="Asymmetric Bodysuit"
+                data-price=""
+              >
+                <i class="fas fa-shopping-bag"></i> Quick Add
+              </button>
+            </div>
+          </div>
+          <div class="prod-info">
+            <p class="prod-cat-lbl"></p>
+            <h3 class="prod-name">set camélia</h3>
+            <p class="prod-price">79,900dt</p>
+            <div class="color-swatches">
+              <span
+                class="color-dot selected"
+                style="background: #ff3dae"
+                data-color="#080808"
+                data-gradient="linear-gradient(135deg,#1a1a1a,#080808)"
+                title="Black"
+              >
+            </div>
+            <button
+              class="add-btn"
+              data-name="Asymmetric Bodysuit"
+              data-price=""
+            >
+              Add to Cart
+            </button>
+          </div>
+        </div>
+        <div
+        class="prod-card reveal"
+        data-cat="setc"
+        data-name="asymmetric bodysuit"
+      >
+        <div class="prod-img">
+          <div class="prod-ph">
+            <i class="fas fa-image"></i><span><img src="sc3.jpeg" alt=""></span>
+          </div>
+          <div class="prod-badge">NEW</div>
+          <div class="prod-overlay">
+            <button
+              class="q-add"
+              data-name="Asymmetric Bodysuit"
+              data-price=""
+            >
+              <i class="fas fa-shopping-bag"></i> Quick Add
+            </button>
+          </div>
+        </div>
+        <div class="prod-info">
+          <p class="prod-cat-lbl"></p>
+          <h3 class="prod-name">set camélia</h3>
+          <p class="prod-price">79,900dt</p>
+          <div class="color-swatches">
+            
+            <span
+              class="color-dot"
+              style="background: #000000"
+              data-color="#1a1a2e"
+              data-gradient="linear-gradient(135deg,#252545,#0d0d1a)"
+              title="Midnight"
+            ></span>
+          </div>
+          <button
+            class="add-btn"
+            data-name="Asymmetric Bodysuit"
+            data-price=""
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
+      <div
+      class="prod-card reveal"
+      data-cat="setc"
+      data-name="asymmetric bodysuit"
+    >
+      <div class="prod-img">
+        <div class="prod-ph">
+          <i class="fas fa-image"></i><span><img src="sc4.jpeg" alt=""></span>
+        </div>
+        <div class="prod-badge">NEW</div>
+        <div class="prod-overlay">
+          <button
+            class="q-add"
+            data-name="Asymmetric Bodysuit"
+            data-price=""
+          >
+            <i class="fas fa-shopping-bag"></i> Quick Add
+          </button>
+        </div>
+      </div>
+      <div class="prod-info">
+        <p class="prod-cat-lbl"></p>
+        <h3 class="prod-name">set camélia</h3>
+        <p class="prod-price">79,900dt</p>
+        <div class="color-swatches">
+          
+          <span
+            class="color-dot"
+            style="background: #723300"
+            data-color="#c8102e"
+            data-gradient="linear-gradient(135deg,#e0243f,#9a0b22)"
+            title="Red"
+          ></span>
+          
+        </div>
+        <button
+          class="add-btn"
+          data-name="Asymmetric Bodysuit"
+          data-price=""
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+          
+
+          <!-- Product 4 -->
+          <!--<div
+            class="prod-card reveal"
+            data-cat="women"
+            data-name="draped midi dress"
+          >
+            <div class="prod-img">
+              <div class="prod-ph">
+                <i class="fas fa-image"></i><span>Add Image</span>
+              </div>
+              <div class="prod-overlay">
+                <button
+                  class="q-add"
+                  data-name="Draped Midi Dress"
+                  data-price=""
+                >
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl">Top</p>
+              <h3 class="prod-name">Draped Midi Dress</h3>
+              <p class="prod-price"></p>
+              <div class="color-swatches">
+                <span
+                  class="color-dot selected"
+                  style="background: #c9a84c"
+                  data-color="#c9a84c"
+                  data-gradient="linear-gradient(135deg,#e4c97a,#9e7a28)"
+                  title="Gold"
+                ></span>
+                <span
+                  class="color-dot"
+                  style="background: #2c6e8a"
+                  data-color="#2c6e8a"
+                  data-gradient="linear-gradient(135deg,#3a90b5,#1c4f63)"
+                  title="Teal"
+                ></span>
+                <span
+                  class="color-dot"
+                  style="background: #f0ede8"
+                  data-color="#f0ede8"
+                  data-gradient="linear-gradient(135deg,#fafafa,#dedad4)"
+                  title="Ivory"
+                ></span>
+                <span
+                  class="color-dot"
+                  style="background: #7b3f6e"
+                  data-color="#7b3f6e"
+                  data-gradient="linear-gradient(135deg,#9e5490,#5a2d52)"
+                  title="Plum"
+                ></span>
+              </div>
+              <button
+                class="add-btn"
+                data-name="Draped Midi Dress"
+                data-price=""
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div> -->
+
+          <!-- Product 5 -->
+          
+
+          <!-- Product 6 -->
+          <div
+            class="prod-card reveal"
+            data-cat="men"
+            data-name="tailored blazer"
+          >
+            <div class="prod-img">
+              <img src="jebba1.jpeg" alt="Tailored Blazer"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class="fas fa-image">
+              
+              <div class="prod-overlay">
+                <button class="q-add" data-name="Tailored Blazer" data-price="">
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl">jebba l'Aid courte</p>
+              <h3 class="prod-name">Jebba l'Aid Courte</h3>
+              <p class="prod-price">44.9dt</p>
+              <div class="color-swatches">
+                <span
+                  class="color-dot selected"
+                  style="background: #0088ff"
+                  data-color="#1c1c1c"
+                  data-gradient="linear-gradient(135deg,#2a2a2a,#080808)"
+                  title="Charcoal"
+                ></span>
+                
+              </div>
+              <button class="add-btn" data-name="Tailored Blazer" data-price="50dt">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 7 -->
+          <div
+            class="prod-card reveal"
+            data-cat="men"
+            data-name="slim-fit chinos"
+          >
+            <div class="prod-img">
+              <div class="prod-ph">
+                <i class="fas fa-image"></i
+                ><span
+                  ><img src="jebba3.png" alt="Strappy Heeled Sandals"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class="fas fa-image">
+              </div>
+             
+              <div class="prod-overlay">
+                <button class="q-add" data-name="Slim-Fit Chinos" data-price="">
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl">jebba l'Aid longue</p>
+              <h3 class="prod-name">Jebba l'Aid Longue</h3>
+              <p class="prod-price">54.9dt</p>
+              <div class="color-swatches">
+                <span
+                  class="color-dot selected"
+                  style="background: #ffffff"
+                  data-color="#c4a882"
+                  data-gradient="linear-gradient(135deg,#d8c0a0,#a8906a)"
+                  title="Khaki"
+                ></span>
+                
+              </div>
+              <button class="add-btn" data-name="Slim-Fit Chinos" data-price="">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 8 -->
+          <div
+            class="prod-card reveal"
+            data-cat="shoes"
+            data-name="strappy heeled sandals"
+          >
+            <div class="prod-img">
+              <img src="robe2.png" alt="Strappy Heeled Sandals"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class="fas fa-image">
+              
+              <div class="prod-overlay">
+                <button
+                  class="q-add"
+                  data-name="Strappy Heeled Sandals"
+                  data-price=""
+                >
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl">Robe marine</p>
+              <h3 class="prod-name"></h3>
+              <p class="prod-price">49.9dt</p>
+              <div class="color-swatches">
+                <span
+                  class="color-dot selected"
+                  style="background: #f0c8b4"
+                  data-color="#c9a84c"
+                  data-gradient="linear-gradient(135deg,#e4c97a,#9e7a28)"
+                  title="Gold"
+                ></span>
+                
+              </div>
+              <button
+                class="add-btn"
+                data-name="Strappy Heeled Sandals"
+                data-price=""
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 9 -->
+          <div
+            class="prod-card reveal"
+            data-cat="shoes"
+            data-name="pointed-toe mules"
+          >
+            <div class="prod-img">
+              <img src="robe11.jpg" alt="Pointed-Toe Mules"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class="fas fa-image">
+              
+              <div class="prod-overlay">
+                <button
+                  class="q-add"
+                  data-name="Pointed-Toe Mules"
+                  data-price=""
+                >
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl">Robe marine</p>
+              <h3 class="prod-name"></h3>
+              <p class="prod-price">49.9dt</p>
+              <div class="color-swatches">
+                <span
+                  class="color-dot selected"
+                  style="background: #692300"
+                  data-color="#c4a882"
+                  data-gradient="linear-gradient(135deg,#d8c0a0,#a8906a)"
+                  title="Nude"
+                >
+                </span>
+                
+              </div>
+              <button
+                class="add-btn"
+                data-name="Pointed-Toe Mules"
+                data-price=""
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 10 -->
+          
+          <div
+            class="prod-card reveal"
+            data-cat="accessories"
+            data-name="gold chain belt"
+          >
+            <div class="prod-img">
+              <img src="set3.jpeg" alt="Gold Chain Belt"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class="fas fa-image">
+              
+              <div class="prod-overlay">
+                <button class="q-add" data-name="Gold Chain Belt" data-price="">
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl">Set d'été</p>
+              <h3 class="prod-name"></h3>
+              <p class="prod-price">49.9dt</p>
+              <div class="color-swatches">
+                <span
+                  class="color-dot selected"
+                  style="background: #ffe3d5"
+                  data-color="#c9a84c"
+                  data-gradient="linear-gradient(135deg,#e4c97a,#9e7a28)"
+                  title="Gold"
+                ></span>
+                
+              </div>
+              <button class="add-btn" data-name="Gold Chain Belt" data-price="">
+                Add to Cart
+              </button>
+            </div>
+          </div> 
+          <!-- Product 11 -->
+          <div
+            class="prod-card reveal"
+            data-cat="accessories"
+            data-name="gold chain belt"
+          >
+            <div class="prod-img">
+              <img src="set11.jpeg" alt="Gold Chain Belt" onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\"fas fa-image\">
+              <div class="prod-overlay">
+                <button class="q-add" data-name="Gold Chain Belt" data-price="">
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl">Set d'été</p>
+              <h3 class="prod-name"></h3>
+              <p class="prod-price">49.9dt</p>
+              <div class="color-swatches">
+                <span
+                  class="color-dot selected"
+                  style="background:#95e5e9"
+                  data-color="#c9a84c"
+                  data-gradient="linear-gradient(135deg,#e4c97a,#9e7a28)"
+                  title="Gold"
+                ></span>
+                
+              </div>
+              <button class="add-btn" data-name="Gold Chain Belt" data-price="">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 12 -->
+          <div
+            class="prod-card reveal"
+            data-cat="accessories"
+            data-name="silk scarf"
+          >
+            <div class="prod-img">
+              <img src="set2.jpeg" alt="Silk Scarf"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class="fas fa-image">
+              <div class="prod-overlay">
+                <button class="q-add" data-name="Silk Scarf" data-price="">
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl">Set d'été</p>
+              <h3 class="prod-name"></h3>
+              <p class="prod-price">49.9dt</p>
+              <div class="color-swatches">
+                <span
+                  class="color-dot selected"
+                  style="background: #51000e"
+                  data-color="#c8102e"
+                  data-gradient="linear-gradient(135deg,#e0243f,#9a0b22)"
+                  title="Red"
+                ></span>
+                
+              </div>
+              <button class="add-btn" data-name="Silk Scarf" data-price="">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- /prod-grid -->
+        <p class="no-results" id="noResults">No products found.</p>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="sec about-sec" id="about">
+      <div class="about-inner">
+        <div class="about-visual reveal">
+          <div class="about-ph">
+            <img src="logo.jpeg" alt="AZ Collection"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class="fas fa-image">
+          </div>
+          <div class="about-box"></div>
+        </div>
+        <div class="about-txt reveal">
+          <p class="sec-pre">Our Story</p>
+          <h2 class="sec-title">Crafted with <em>Passion</em></h2>
+          <p>
+            AZ Collection is a luxury fashion brand born from a deep love of
+            refined design and feminine elegance. Every piece is thoughtfully
+            crafted to celebrate the modern woman — confident, timeless, and
+            effortlessly stylish.
+          </p>
+          <p>
+            From our signature off-shoulder silhouettes to our wide-leg
+            trousers, each garment tells a story of craftsmanship, quality, and
+            conscious fashion.
+          </p>
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-n">200+</div>
+              <div class="stat-l">Designs</div>
+            </div>
+            <div class="stat">
+              <div class="stat-n">50+</div>
+              <div class="stat-l">Cities</div>
+            </div>
+            <div class="stat">
+              <div class="stat-n">10K+</div>
+              <div class="stat-l">Clients</div>
+            </div>
+          </div>
+          <a href="#shop" class="btn btn-outline"
+            >Explore the Collection <i class="fas fa-arrow-right"></i
+          ></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="sec" id="contact">
+      <div class="sec-head reveal">
+        <p class="sec-pre">Get in Touch</p>
+        <h2 class="sec-title">Contact <em>Us</em></h2>
+      </div>
+      <div class="contact-inner">
+        <div class="reveal">
+          <div class="c-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h4>Visit Us</h4>
+              <p>nabeul</p>
+            </div>
+          </div>
+          <div class="c-item">
+            <i class="fas fa-phone"></i>
+            <div>
+              <h4>Call Us</h4>
+              <p>+21653953093</p>
+            </div>
+          </div>
+          <div class="c-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h4>Email Us</h4>
+              <p>Zahrouniabir947@gmail.com</p>
+            </div>
+          </div>
+          <div class="c-social">
+            </i>
+              <a href="https://www.instagram.com/az_collection_2026" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="https://www.tiktok.com/@abirzahrouni2" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                <i class="fab fa-tiktok"></i>
+            </a>
+            
+              <a href="https://www.facebook.com/abirzahrounii" target="_blank" rel="noopener noreferrer" aria-label="facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+           
+              <a href="https://wa.me/21653953093" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i>
+              </a>
+          </div>
+        </div>
+        <form class="c-form reveal" onsubmit="handleContact(event)">
+          <div class="f-row">
+            <input
+              class="f-ctrl"
+              type="text"
+              placeholder="Your Name"
+              required
+            />
+            <input
+              class="f-ctrl"
+              type="email"
+              placeholder="Your Email"
+              required
+            />
+          </div>
+          <input class="f-ctrl" type="text" placeholder="Subject" />
+          <textarea
+            class="f-ctrl"
+            rows="5"
+            placeholder="Your Message"
+            required
+          ></textarea>
+          <button type="submit" class="btn btn-gold">
+            Send Message <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+      <div class="foot-inner">
+        <div class="foot-logo">
+          <div class="logo">
+            <span class="logo-az">AZ</span
+            ><span class="logo-sub">Collection</span>
+          </div>
+          <p>Luxury fashion for the modern era.<br />Wear your story.</p>
+          <div class="foot-social">
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="Pinterest"
+              ><i class="fab fa-pinterest-p"></i
+            ></a>
+            <a href="#" aria-label="WhatsApp"
+              ><i class="fab fa-whatsapp"></i
+            ></a>
+          </div>
+        </div>
+        <div class="foot-col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="#shop">New Arrivals</a></li>
+            <li><a href="#shop">top</a></li>
+            <li><a href="#shop">jebba l'Aid</a></li>
+            <li><a href="#shop">Robe marine</a></li>
+            <li><a href="#shop">Set d'été</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4>Help</h4>
+          <ul>
+            <li><a href="#">Size Guide</a></li>
+            <li><a href="#">Shipping &amp; Returns</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Care Instructions</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4>Newsletter</h4>
+          <p>Get exclusive offers and new arrivals straight to your inbox.</p>
+          <div class="nl-wrap">
+            <input type="email" placeholder="Zahrouniabir947@gmail.com" />
+            <button onclick="nlSubmit(this)">
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <p>© 2025 AZ Collection. All rights reserved.</p>
+        <p>Made with <i class="fas fa-heart"></i> by AZ Fashion Designer</p>
+      </div>
+    </footer>
+
+    <!-- ===== CART SIDEBAR ===== -->
+    <div class="cart-mask" id="cartMask"></div>
+    <aside class="cart-side" id="cartSide">
+      <div class="cart-top">
+        <h2>Your Bag <span id="cartCount">(0)</span></h2>
+        <button class="cart-close-btn" id="cartCloseBtn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="cart-body" id="cartBody">
+        <div class="cart-empty-state" id="cartEmpty">
+          <i class="fas fa-shopping-bag"></i>
+          <p>Your bag is empty</p>
+          <a href="#shop" class="btn btn-gold" id="emptyShopLink"
+            >Start Shopping</a
+          >
+        </div>
+        <ul class="cart-list" id="cartList"></ul>
+      </div>
+      <div class="cart-foot" id="cartFoot" style="display: none">
+        <div class="total-row">
+          <span>Total</span>
+          <span id="cartTotal">—</span>
+        </div>
+        <p class="cart-note">* Prices confirmed at checkout</p>
+        <button class="btn btn-gold w-full">
+          Checkout <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+      /* =========================================
+   STATE
+   ========================================= */
+      let cart = [];
+
+      /* =========================================
+   ELEMENTS
+   ========================================= */
+      const navbar = document.getElementById("navbar");
+      const burger = document.getElementById("burger");
+      const mobileNav = document.getElementById("mobileNav");
+      const searchToggle = document.getElementById("searchToggle");
+      const searchDrop = document.getElementById("searchDrop");
+      const searchInput = document.getElementById("searchInput");
+      const searchX = document.getElementById("searchX");
+      const cartToggle = document.getElementById("cartToggle");
+      const cartMask = document.getElementById("cartMask");
+      const cartSide = document.getElementById("cartSide");
+      const cartCloseBtn = document.getElementById("cartCloseBtn");
+      const cartBadge = document.getElementById("cartBadge");
+      const cartCount = document.getElementById("cartCount");
+      const cartBody = document.getElementById("cartBody");
+      const cartEmpty = document.getElementById("cartEmpty");
+      const cartList = document.getElementById("cartList");
+      const cartFoot = document.getElementById("cartFoot");
+      const cartTotal = document.getElementById("cartTotal");
+      const prodGrid = document.getElementById("prodGrid");
+      const noResults = document.getElementById("noResults");
+      const toast = document.getElementById("toast");
+      const emptyShopLink = document.getElementById("emptyShopLink");
+
+      /* =========================================
+   NAVBAR SCROLL
+   ========================================= */
+      window.addEventListener(
+        "scroll",
+        () => {
+          navbar.classList.toggle("scrolled", window.scrollY > 40);
+          highlightNav();
+        },
+        { passive: true }
+      );
+
+      function highlightNav() {
+        const ids = ["home", "shop", "categories", "about", "contact"];
+        let cur = "";
+        ids.forEach((id) => {
+          const el = document.getElementById(id);
+          if (el && el.getBoundingClientRect().top <= 90) cur = id;
+        });
+        document.querySelectorAll(".nav-a").forEach((a) => {
+          a.classList.toggle("active", a.getAttribute("href") === `#${cur}`);
+        });
+      }
+
+      /* =========================================
+   HAMBURGER
+   ========================================= */
+      burger.addEventListener("click", () => {
+        burger.classList.toggle("open");
+        mobileNav.classList.toggle("open");
+      });
+      mobileNav.querySelectorAll("a").forEach((a) => {
+        a.addEventListener("click", () => {
+          burger.classList.remove("open");
+          mobileNav.classList.remove("open");
+        });
+      });
+
+      /* =========================================
+   SEARCH
+   ========================================= */
+      searchToggle.addEventListener("click", () => {
+        searchDrop.classList.toggle("open");
+        if (searchDrop.classList.contains("open"))
+          setTimeout(() => searchInput.focus(), 180);
+      });
+      searchX.addEventListener("click", () => {
+        searchDrop.classList.remove("open");
+        searchInput.value = "";
+        filterProds();
+      });
+      searchInput.addEventListener("input", filterProds);
+
+      /* =========================================
+   FILTER BUTTONS
+   ========================================= */
+      document.querySelectorAll(".f-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".f-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          filterProds();
+        });
+      });
+
+      /* =========================================
+   CATEGORY CARDS
+   ========================================= */
+      document.querySelectorAll(".cat-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          const cat = card.dataset.filter;
+          document
+            .getElementById("shop")
+            .scrollIntoView({ behavior: "smooth" });
+          setTimeout(() => {
+            document.querySelectorAll(".f-btn").forEach((b) => {
+              b.classList.toggle("active", b.dataset.cat === cat);
+            });
+            filterProds();
+          }, 500);
+        });
+      });
+
+      /* =========================================
+   FILTER PRODUCTS
+   ========================================= */
+      function filterProds() {
+        const cat = document.querySelector(".f-btn.active").dataset.cat;
+        const q = searchInput.value.trim().toLowerCase();
+        let count = 0;
+        document.querySelectorAll(".prod-card").forEach((card) => {
+          const matchCat = cat === "all" || card.dataset.cat === cat;
+          const matchQ = !q || card.dataset.name.includes(q);
+          const show = matchCat && matchQ;
+          card.classList.toggle("hide", !show);
+          if (show) count++;
+        });
+        noResults.style.display = count === 0 ? "block" : "none";
+      }
+
+      /* =========================================
+   ADD TO CART — delegated
+   ========================================= */
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest(".add-btn, .q-add");
+        if (!btn) return;
+        const name = btn.dataset.name;
+        const price = btn.dataset.price || "";
+        addItem(name, price);
+      });
+
+      function addItem(name, price) {
+        const existing = cart.find((i) => i.name === name);
+        if (existing) {
+          existing.qty++;
+        } else {
+          cart.push({ name, price, qty: 1 });
+        }
+        renderCart();
+        showToast(`"${name}" added to bag`);
+      }
+
+      /* =========================================
+   CART OPEN / CLOSE
+   ========================================= */
+      function openCart() {
+        cartSide.classList.add("on");
+        cartMask.classList.add("on");
+        document.body.style.overflow = "hidden";
+      }
+      function closeCart() {
+        cartSide.classList.remove("on");
+        cartMask.classList.remove("on");
+        document.body.style.overflow = "";
+      }
+      cartToggle.addEventListener("click", openCart);
+      cartCloseBtn.addEventListener("click", closeCart);
+      cartMask.addEventListener("click", closeCart);
+      emptyShopLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        closeCart();
+        document.getElementById("shop").scrollIntoView({ behavior: "smooth" });
+      });
+
+      /* =========================================
+   RENDER CART
+   ========================================= */
+      function renderCart() {
+        cartList.innerHTML = "";
+        const total = cart.reduce((s, i) => s + i.qty, 0);
+        cartCount.textContent = `(${total})`;
+        cartBadge.textContent = total;
+        cartBadge.classList.toggle("show", total > 0);
+
+        if (!cart.length) {
+          cartEmpty.style.display = "flex";
+          cartFoot.style.display = "none";
+          return;
+        }
+        cartEmpty.style.display = "none";
+        cartFoot.style.display = "block";
+
+        cart.forEach((item, idx) => {
+          const li = document.createElement("li");
+          li.className = "c-item-row";
+          li.innerHTML = `
+      <div class="c-thumb"><i class="fas fa-tshirt"></i></div>
+      <div class="c-deets">
+        <p class="c-name">${item.name}</p>
+        <p class="c-price">${item.price || "—"}</p>
+        <div class="qty-row">
+          <button class="qty-b" onclick="changeQty(${idx},-1)">−</button>
+          <span class="qty-n">${item.qty}</span>
+          <button class="qty-b" onclick="changeQty(${idx},1)">+</button>
+        </div>
+      </div>
+      <button class="rm-btn" onclick="removeItem(${idx})"><i class="fas fa-trash-alt"></i></button>
+    `;
+          cartList.appendChild(li);
+        });
+
+        // Total
+        const numericItems = cart.filter((i) => parseFloat(i.price));
+        if (!numericItems.length) {
+          cartTotal.textContent = "—";
+        } else {
+          const sum = cart.reduce((s, i) => {
+            const n = parseFloat(i.price.replace(/[^0-9.]/g, "")) || 0;
+            return s + n * i.qty;
+          }, 0);
+          const sym =
+            cart.find((i) => i.price)?.price?.match(/[^0-9.]/)?.[0] || "$";
+          cartTotal.textContent = sym + sum.toFixed(2);
+        }
+      }
+
+      function changeQty(idx, delta) {
+        cart[idx].qty += delta;
+        if (cart[idx].qty <= 0) cart.splice(idx, 1);
+        renderCart();
+      }
+      function removeItem(idx) {
+        cart.splice(idx, 1);
+        renderCart();
+      }
+
+      /* =========================================
+   TOAST
+   ========================================= */
+      let toastTimer;
+      function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.add("on");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove("on"), 2800);
+      }
+
+      /* =========================================
+   CONTACT FORM
+   ========================================= */
+      function handleContact(e) {
+        e.preventDefault();
+        showToast("Message sent! We'll get back to you soon.");
+        e.target.reset();
+      }
+
+      /* =========================================
+   NEWSLETTER
+   ========================================= */
+      function nlSubmit(btn) {
+        const input = btn.previousElementSibling;
+        if (input.value) {
+          showToast("Thanks for subscribing!");
+          input.value = "";
+        }
+      }
+
+      /* =========================================
+   SCROLL REVEAL
+   ========================================= */
+      const revealObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+              entry.target.style.transitionDelay = (i % 4) * 0.08 + "s";
+              entry.target.classList.add("visible");
+              revealObs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -36px 0px" }
+      );
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => revealObs.observe(el));
+
+      /* =========================================
+   SMOOTH SCROLL (offset for navbar)
+   ========================================= */
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener("click", function (e) {
+          const id = this.getAttribute("href");
+          if (id === "#") return;
+          const target = document.querySelector(id);
+          if (!target) return;
+          e.preventDefault();
+          const top = target.getBoundingClientRect().top + window.scrollY - 72;
+          window.scrollTo({ top, behavior: "smooth" });
+        });
+      });
+
+      /* =========================================
+   COLOR SWATCHES — change placeholder bg on click
+   ========================================= */
+      document.addEventListener("click", (e) => {
+        const dot = e.target.closest(".color-dot");
+        if (!dot) return;
+
+        const card = dot.closest(".prod-card");
+        if (!card) return;
+
+        // Update selected state within this card
+        card
+          .querySelectorAll(".color-dot")
+          .forEach((d) => d.classList.remove("selected"));
+        dot.classList.add("selected");
+
+        // Apply gradient to the placeholder
+        const ph = card.querySelector(".prod-ph");
+        if (!ph) return;
+
+        const gradient =
+          dot.dataset.gradient ||
+          `linear-gradient(135deg, ${dot.dataset.color}, ${dot.dataset.color})`;
+        const isLight = isLightColor(dot.dataset.color);
+
+        ph.style.background = gradient;
+        if (isLight) {
+          ph.classList.remove("colored");
+          ph.style.color = "var(--gray-400)";
+          ph.querySelectorAll("span").forEach(
+            (s) => (s.style.color = "var(--gray-400)")
+          );
+        } else {
+          ph.classList.add("colored");
+          ph.style.color = "rgba(255,255,255,0.5)";
+          ph.querySelectorAll("span").forEach(
+            (s) => (s.style.color = "rgba(255,255,255,0.4)")
+          );
+        }
+      });
+
+      function isLightColor(hex) {
+        const c = hex.replace("#", "");
+        const r = parseInt(c.substring(0, 2), 16);
+        const g = parseInt(c.substring(2, 4), 16);
+        const b = parseInt(c.substring(4, 6), 16);
+        const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+        return lum > 180;
+      }
+
+      // Init: apply default selected color to each card's placeholder
+      document.querySelectorAll(".prod-card").forEach((card) => {
+        const selected = card.querySelector(".color-dot.selected");
+        if (!selected) return;
+        const ph = card.querySelector(".prod-ph");
+        if (!ph) return;
+        const gradient =
+          selected.dataset.gradient ||
+          `linear-gradient(135deg, ${selected.dataset.color}, ${selected.dataset.color})`;
+        const isLight = isLightColor(selected.dataset.color);
+        ph.style.background = gradient;
+        if (!isLight) {
+          ph.classList.add("colored");
+          ph.style.color = "rgba(255,255,255,0.5)";
+          ph.querySelectorAll("span").forEach(
+            (s) => (s.style.color = "rgba(255,255,255,0.4)")
+          );
+        }
+      });
+
+      // Init
+      renderCart();
+      filterProds();
+    </script>
+  </body>
+</html>
