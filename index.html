@@ -3507,7 +3507,7 @@
           cartTotal.textContent = "—";
         } else {
           const sum = cart.reduce((s, i) => {
-            const n = parseFloat(i.price.replace(/[^0-9.]/g, ",")) || 0;
+            const n = parseFloat(i.price.replace(/[^0-9.]/g, "")) || 0;
             return s + n * i.qty;
           }, 0);
           const sym =
