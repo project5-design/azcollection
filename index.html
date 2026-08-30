@@ -3507,7 +3507,7 @@
           cartTotal.textContent = "—";
         } else {
           const sum = cart.reduce((s, i) => {
-            const n = parseFloat(i.price.replace(/[^0-9.]/g, "")) || 0;
+            const n = parseFloat(i.price.replace(/[^0-9.]/g,  "")) || 0;
             return s + n * i.qty;
           }, 0);
           const sym =
@@ -3685,16 +3685,16 @@
       sendOrderBtn.addEventListener("click", () => {
         const firstName = document.getElementById("custFirstName").value.trim();
         const lastName = document.getElementById("custLastName").value.trim();
-        const email = document.getElementById("custEmail").value.trim();
+       /* const email = document.getElementById("custEmail").value.trim();*/
         const phone = document.getElementById("custPhone").value.trim();
 
-        if (!firstName || !lastName || !email) {
-          showToast("Merci de remplir prenome , nome et Email");
+        if (!firstName || !lastName ) {
+          showToast("Merci de remplir prenome , nome ");
           return;
         }
 
         let msg = `🛍️ *Nouvelle Commande - AZ Collection*\n\n`;
-        msg += `👤 prenome: ${firstName}\n👤 nome: ${lastName}\n📧 Email: ${email}\n`;
+        msg += `👤 prenome: ${firstName}\n👤 nome: ${lastName}\n`;
         if (phone) msg += `📞 Tél: ${phone}\n`;
         msg += `\n*Articles:*\n`;
         cart.forEach((item) => {
