@@ -684,7 +684,6 @@
       .cat-card:hover .cat-img {
         transform: scale(1.05);
       }
-      /* Replace cat-img div with img tag later */
       .cat-img img {
         width: 100%;
         height: 100%;
@@ -769,7 +768,6 @@
         overflow: hidden;
         background: var(--gray-100);
       }
-      /* Placeholder shown when no real image */
       .prod-ph {
         width: 100%;
         height: 100%;
@@ -792,7 +790,6 @@
       .prod-card:hover .prod-ph {
         transform: scale(1.06);
       }
-      /* When a real image is placed */
       .prod-img img {
         width: 100%;
         height: 100%;
@@ -939,7 +936,6 @@
         transform: scale(1.18);
         box-shadow: 0 0 0 1px var(--white), 0 0 0 3px var(--black);
       }
-      /* Animated placeholder when color selected */
       .prod-ph {
         transition: background 0.4s var(--ease), color 0.3s;
       }
@@ -1427,6 +1423,13 @@
         letter-spacing: 0.05em;
         margin-bottom: 14px;
       }
+      .checkout-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-45%);width:400px;max-width:92vw;background:var(--white);border-radius:var(--r);z-index:1201;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;}
+      .checkout-modal.on{opacity:1;pointer-events:all;transform:translate(-50%,-50%);}
+      .checkout-top{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid var(--gray-200);}
+      .checkout-top h2{font-family:var(--serif);font-size:1.25rem;font-weight:500;}
+      .checkout-body{padding:20px 22px 26px;display:flex;flex-direction:column;gap:12px;}
+      .checkout-note{font-size:.62rem;color:var(--gray-400);text-align:center;margin-top:4px;}
+
 
       /* ========== TOAST ========== */
       .toast {
@@ -1463,7 +1466,6 @@
         transform: translateY(0);
       }
 
-      /* ========== RESPONSIVE ========== */
       /* ========== RESPONSIVE ========== */
 
       /* Tablet landscape */
@@ -1632,15 +1634,12 @@
           playsinline
           poster="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1920&q=80"
         >
-          <!-- Free fashion stock video from Pexels (no login needed) -->
           <source
             src="vd.mp4"
             type="video/mp4"
           />
-          <!-- Fallback if video fails to load -->
           Your browser does not support the video tag.
         </video>
-        <!-- Dark + pink overlay on top of video -->
         <div class="hero-video-overlay"></div>
       </div>
 
@@ -1682,18 +1681,15 @@
     </div>
 
     <!-- ===== CATEGORIES ===== -->
-    <section class="sec" id="categories">
+    <section class="all" id="categories">
       <div class="sec-inner">
         <div class="sec-head reveal">
           <p class="sec-pre">Explore</p>
           <h2 class="sec-title">Shop by <em>Category</em></h2>
         </div>
         <div class="cat-grid">
-          <div class="cat-card reveal" data-filter="women">
+          <div class="cat-card reveal" data-filter="all">
             <div class="cat-img">
-              <!-- Replace this div with: <img src="women.jpg" alt="Women"
-                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class="fas fa-image"></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
-              /> -->
               <i class="fas fa-female"></i>
               <span
                 style="
@@ -1704,142 +1700,99 @@
                 >stay tuned</span
               >
             </div>
-           <!-- <div class="cat-foot">
-              <h3>Top</h3>
-              <span>Explore <i class="fas fa-arrow-right"></i></span>
-            </div>-->
-          
           </div>
+
           <div class="cat-card reveal" data-filter="pon">
             <div class="cat-img">
               <img
                 src="p1.jpeg"
-                alt=">Perled'été"
-                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\"fas fa-image\">
-
-              <span
-                style="
-                  font-size: 0.6rem;
-                  letter-spacing: 0.2em;
-                  text-transform: uppercase;
-                "
-              ></span>
+                alt="pantaloon school"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\'fas fa-image\'></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
+              />
             </div>
             <div class="cat-foot">
-              <h3>pantaloon school </h3>
+              <h3>pantaloon school</h3>
               <span>Explore <i class="fas fa-arrow-right"></i></span>
             </div>
           </div>
+
           <div class="cat-card reveal" data-filter="Setfoutoun">
             <div class="cat-img">
               <img
                 src="sf1.jpeg"
-                alt=">Perled'été"
-                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\"fas fa-image\">
-
-              <span
-                style="
-                  font-size: 0.6rem;
-                  letter-spacing: 0.2em;
-                  text-transform: uppercase;
-                "
-              ></span>
+                alt="Set foutoun"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\'fas fa-image\'></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
+              />
             </div>
             <div class="cat-foot">
               <h3>Set foutoun</h3>
               <span>Explore <i class="fas fa-arrow-right"></i></span>
             </div>
           </div>
+
           <div class="cat-card reveal" data-filter="setc">
             <div class="cat-img">
               <img
                 src="sc1.jpeg"
-                alt=">Perled'été"
-                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\"fas fa-image\">
-
-              <span
-                style="
-                  font-size: 0.6rem;
-                  letter-spacing: 0.2em;
-                  text-transform: uppercase;
-                "
-              ></span>
+                alt="Set camélia"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\'fas fa-image\'></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
+              />
             </div>
             <div class="cat-foot">
               <h3>Set camélia</h3>
               <span>Explore <i class="fas fa-arrow-right"></i></span>
             </div>
           </div>
+
           <div class="cat-card reveal" data-filter="robevoilee">
             <div class="cat-img">
               <img
                 src="rv.jpeg"
-                alt=">Perled'été"
-                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\"fas fa-image\">
-
-              <span
-                style="
-                  font-size: 0.6rem;
-                  letter-spacing: 0.2em;
-                  text-transform: uppercase;
-                "
-              ></span>
+                alt="Robe voilée"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\'fas fa-image\'></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
+              />
             </div>
             <div class="cat-foot">
               <h3>Robe voilée</h3>
               <span>Explore <i class="fas fa-arrow-right"></i></span>
             </div>
           </div>
-          
+
           <div class="cat-card reveal" data-filter="women">
             <div class="cat-img">
               <img
                 src="pde1.jpeg"
-                alt=">Perled'été"
-                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\"fas fa-image\">
-
-              <span
-                style="
-                  font-size: 0.6rem;
-                  letter-spacing: 0.2em;
-                  text-transform: uppercase;
-                "
-              ></span>
+                alt="Perle d'été"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\'fas fa-image\'></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
+              />
             </div>
             <div class="cat-foot">
               <h3>Perle d'été</h3>
               <span>Explore <i class="fas fa-arrow-right"></i></span>
             </div>
           </div>
+
           <div class="cat-card reveal" data-filter="robe">
             <div class="cat-img">
               <img
                 src="rb1.jpeg"
-                alt=">Perled'été"
-                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\"fas fa-image\">
-
-              <span
-                style="
-                  font-size: 0.6rem;
-                  letter-spacing: 0.2em;
-                  text-transform: uppercase;
-                "
-              ></span>
+                alt="Robe chic"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\'fas fa-image\'></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
+              />
             </div>
             <div class="cat-foot">
               <h3>Robe chic</h3>
               <span>Explore <i class="fas fa-arrow-right"></i></span>
             </div>
           </div>
-          
-          
 
           <div class="cat-card reveal" data-filter="shoes">
             <div class="cat-img">
               <img
                 src="robe1.jpeg"
                 alt="Robe marine"
-                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\"fas fa-image\">
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\'fas fa-image\'></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
+              />
             </div>
             <div class="cat-foot">
               <h3>Robe marine</h3>
@@ -1851,16 +1804,9 @@
             <div class="cat-img">
               <img
                 src="set1.jpeg"
-                alt="Robe marine"
-                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\"fas fa-image\"></i>
-              <i class="fas fa-female" style="display: none"></i>
-              <span
-                style="
-                  font-size: 0.6rem;
-                  letter-spacing: 0.2em;
-                  text-transform: uppercase;
-                "
-              ></span>
+                alt="Set d'été"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\'fas fa-image\'></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
+              />
             </div>
             <div class="cat-foot">
               <h3>Set d'été</h3>
@@ -1895,15 +1841,7 @@
 
         <!-- Products -->
         <div class="prod-grid" id="prodGrid">
-          <!-- ===== HOW TO ADD YOUR OWN IMAGE =====
-           Replace the <div class="prod-ph">...</div>
-           with: <img src="YOUR-IMAGE.jpg" alt="Product Name"
-                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class="fas fa-image"></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
-              />
-           inside <div class="prod-img">
-      ============================================ -->
 
-          
           <!-- pantaloon-->
           <div
             class="prod-card reveal"
@@ -1930,7 +1868,6 @@
               <h3 class="prod-name">pantaloon school</h3>
               <p class="prod-price">44,900dt</p>
               <div class="color-swatches">
-                
               </div>
               <button
                 class="add-btn"
@@ -1966,7 +1903,6 @@
               <h3 class="prod-name">pantaloon school</h3>
               <p class="prod-price">44,900dt</p>
               <div class="color-swatches">
-               
               </div>
               <button
                 class="add-btn"
@@ -2002,7 +1938,6 @@
               <h3 class="prod-name">pantaloon school</h3>
               <p class="prod-price">44,900dt</p>
               <div class="color-swatches">
-               
               </div>
               <button
                 class="add-btn"
@@ -2013,7 +1948,7 @@
               </button>
             </div>
           </div>
-          
+
           <div
             class="prod-card reveal"
             data-cat="women"
@@ -2039,7 +1974,6 @@
               <h3 class="prod-name">Perle d'été</h3>
               <p class="prod-price">59,900dt</p>
               <div class="color-swatches">
-               
               </div>
               <button
                 class="add-btn"
@@ -2076,7 +2010,6 @@
               <h3 class="prod-name">Perle d'été</h3>
               <p class="prod-price">59,900dt</p>
               <div class="color-swatches">
-                
               </div>
               <button
                 class="add-btn"
@@ -2112,7 +2045,6 @@
               <h3 class="prod-name">Perle d'été</h3>
               <p class="prod-price">59,900dt</p>
               <div class="color-swatches">
-               
               </div>
               <button
                 class="add-btn"
@@ -2148,7 +2080,6 @@
               <h3 class="prod-name">Perle d'été</h3>
               <p class="prod-price">59,900dt</p>
               <div class="color-swatches">
-               
               </div>
               <button
                 class="add-btn"
@@ -2184,7 +2115,6 @@
               <h3 class="prod-name">Perle d'été</h3>
               <p class="prod-price">59,900dt</p>
               <div class="color-swatches">
-                
               </div>
               <button
                 class="add-btn"
@@ -2220,7 +2150,6 @@
               <h3 class="prod-name">Perle d'été</h3>
               <p class="prod-price">59,900dt</p>
               <div class="color-swatches">
-               
               </div>
               <button
                 class="add-btn"
@@ -2257,7 +2186,6 @@
               <h3 class="prod-name">robe chic</h3>
               <p class="prod-price">49,900dt</p>
               <div class="color-swatches">
-                
               </div>
               <button
                 class="add-btn"
@@ -2293,7 +2221,6 @@
               <h3 class="prod-name">robe chic</h3>
               <p class="prod-price">49,900dt</p>
               <div class="color-swatches">
-                
               </div>
               <button
                 class="add-btn"
@@ -2329,8 +2256,6 @@
               <h3 class="prod-name">robe chic</h3>
               <p class="prod-price">49,900dt</p>
               <div class="color-swatches">
-               
-                
               </div>
               <button
                 class="add-btn"
@@ -2373,7 +2298,6 @@
                   data-gradient="linear-gradient(135deg,#fafafa,#e8e4dd)"
                   title="Cream"
                 ></span>
-                
               </div>
               <button
                 class="add-btn"
@@ -2410,7 +2334,6 @@
               <h3 class="prod-name">set foutoun</h3>
               <p class="prod-price">79,900dt</p>
               <div class="color-swatches">
-                
               </div>
               <button
                 class="add-btn"
@@ -2446,7 +2369,6 @@
               <h3 class="prod-name">set foutoun</h3>
               <p class="prod-price">79,900dt</p>
               <div class="color-swatches">
-                
               </div>
               <button
                 class="add-btn"
@@ -2482,8 +2404,6 @@
               <h3 class="prod-name">set foutoun</h3>
               <p class="prod-price">79,900dt</p>
               <div class="color-swatches">
-               
-                
               </div>
               <button
                 class="add-btn"
@@ -2519,8 +2439,6 @@
               <h3 class="prod-name">set foutoun</h3>
               <p class="prod-price">79,900dt</p>
               <div class="color-swatches">
-               
-                
               </div>
               <button
                 class="add-btn"
@@ -2557,7 +2475,6 @@
               <h3 class="prod-name">robe voilée</h3>
               <p class="prod-price">59,900dt</p>
               <div class="color-swatches">
-                
               </div>
               <button
                 class="add-btn"
@@ -2593,7 +2510,6 @@
               <h3 class="prod-name">robe voilée</h3>
               <p class="prod-price">59,900dt</p>
               <div class="color-swatches">
-                
               </div>
               <button
                 class="add-btn"
@@ -2629,8 +2545,6 @@
               <h3 class="prod-name">robe voilée</h3>
               <p class="prod-price">59,900dt</p>
               <div class="color-swatches">
-               
-                
               </div>
               <button
                 class="add-btn"
@@ -2673,7 +2587,6 @@
                   data-gradient="linear-gradient(135deg,#fafafa,#e8e4dd)"
                   title="Cream"
                 ></span>
-                
               </div>
               <button
                 class="add-btn"
@@ -2685,7 +2598,7 @@
             </div>
           </div>
 
-          <!-- Product 3 -->
+          <!-- set camélia -->
           <div
             class="prod-card reveal"
             data-cat="setc"
@@ -2711,7 +2624,6 @@
               <h3 class="prod-name">set camélia</h3>
               <p class="prod-price">79,900dt</p>
               <div class="color-swatches">
-               
                 <span
                   class="color-dot"
                   style="background: #f5c2c7"
@@ -2719,7 +2631,6 @@
                   data-gradient="linear-gradient(135deg,#fad7db,#e8a0a9)"
                   title="Blush"
                 ></span>
-                
               </div>
               <button
                 class="add-btn"
@@ -2731,150 +2642,19 @@
             </div>
           </div>
           <div
-          class="prod-card reveal"
-          data-cat="setc"
-          data-name="asymmetric bodysuit"
-        >
-          <div class="prod-img">
-            <div class="prod-ph">
-              <i class="fas fa-image"></i><span><img src="sc2.jpeg" alt=""></span>
-            </div>
-            <div class="prod-badge">NEW</div>
-            <div class="prod-overlay">
-              <button
-                class="q-add"
-                data-name="Asymmetric Bodysuit"
-                data-price=""
-              >
-                <i class="fas fa-shopping-bag"></i> Quick Add
-              </button>
-            </div>
-          </div>
-          <div class="prod-info">
-            <p class="prod-cat-lbl"></p>
-            <h3 class="prod-name">set camélia</h3>
-            <p class="prod-price">79,900dt</p>
-            <div class="color-swatches">
-              <span
-                class="color-dot selected"
-                style="background: #ff3dae"
-                data-color="#080808"
-                data-gradient="linear-gradient(135deg,#1a1a1a,#080808)"
-                title="Black"
-              >
-            </div>
-            <button
-              class="add-btn"
-              data-name="Asymmetric Bodysuit"
-              data-price=""
-            >
-              Add to Cart
-            </button>
-          </div>
-        </div>
-        <div
-        class="prod-card reveal"
-        data-cat="setc"
-        data-name="asymmetric bodysuit"
-      >
-        <div class="prod-img">
-          <div class="prod-ph">
-            <i class="fas fa-image"></i><span><img src="sc3.jpeg" alt=""></span>
-          </div>
-          <div class="prod-badge">NEW</div>
-          <div class="prod-overlay">
-            <button
-              class="q-add"
-              data-name="Asymmetric Bodysuit"
-              data-price=""
-            >
-              <i class="fas fa-shopping-bag"></i> Quick Add
-            </button>
-          </div>
-        </div>
-        <div class="prod-info">
-          <p class="prod-cat-lbl"></p>
-          <h3 class="prod-name">set camélia</h3>
-          <p class="prod-price">79,900dt</p>
-          <div class="color-swatches">
-            
-            <span
-              class="color-dot"
-              style="background: #000000"
-              data-color="#1a1a2e"
-              data-gradient="linear-gradient(135deg,#252545,#0d0d1a)"
-              title="Midnight"
-            ></span>
-          </div>
-          <button
-            class="add-btn"
-            data-name="Asymmetric Bodysuit"
-            data-price=""
-          >
-            Add to Cart
-          </button>
-        </div>
-      </div>
-      <div
-      class="prod-card reveal"
-      data-cat="setc"
-      data-name="asymmetric bodysuit"
-    >
-      <div class="prod-img">
-        <div class="prod-ph">
-          <i class="fas fa-image"></i><span><img src="sc4.jpeg" alt=""></span>
-        </div>
-        <div class="prod-badge">NEW</div>
-        <div class="prod-overlay">
-          <button
-            class="q-add"
-            data-name="Asymmetric Bodysuit"
-            data-price=""
-          >
-            <i class="fas fa-shopping-bag"></i> Quick Add
-          </button>
-        </div>
-      </div>
-      <div class="prod-info">
-        <p class="prod-cat-lbl"></p>
-        <h3 class="prod-name">set camélia</h3>
-        <p class="prod-price">79,900dt</p>
-        <div class="color-swatches">
-          
-          <span
-            class="color-dot"
-            style="background: #723300"
-            data-color="#c8102e"
-            data-gradient="linear-gradient(135deg,#e0243f,#9a0b22)"
-            title="Red"
-          ></span>
-          
-        </div>
-        <button
-          class="add-btn"
-          data-name="Asymmetric Bodysuit"
-          data-price=""
-        >
-          Add to Cart
-        </button>
-      </div>
-    </div>
-          
-
-          <!-- Product 4 -->
-          <!--<div
             class="prod-card reveal"
-            data-cat="women"
-            data-name="draped midi dress"
+            data-cat="setc"
+            data-name="asymmetric bodysuit"
           >
             <div class="prod-img">
               <div class="prod-ph">
-                <i class="fas fa-image"></i><span>Add Image</span>
+                <i class="fas fa-image"></i><span><img src="sc2.jpeg" alt=""></span>
               </div>
+              <div class="prod-badge">NEW</div>
               <div class="prod-overlay">
                 <button
                   class="q-add"
-                  data-name="Draped Midi Dress"
+                  data-name="Asymmetric Bodysuit"
                   data-price=""
                 >
                   <i class="fas fa-shopping-bag"></i> Quick Add
@@ -2882,62 +2662,124 @@
               </div>
             </div>
             <div class="prod-info">
-              <p class="prod-cat-lbl">Top</p>
-              <h3 class="prod-name">Draped Midi Dress</h3>
-              <p class="prod-price"></p>
+              <p class="prod-cat-lbl"></p>
+              <h3 class="prod-name">set camélia</h3>
+              <p class="prod-price">79,900dt</p>
               <div class="color-swatches">
                 <span
                   class="color-dot selected"
-                  style="background: #c9a84c"
-                  data-color="#c9a84c"
-                  data-gradient="linear-gradient(135deg,#e4c97a,#9e7a28)"
-                  title="Gold"
-                ></span>
-                <span
-                  class="color-dot"
-                  style="background: #2c6e8a"
-                  data-color="#2c6e8a"
-                  data-gradient="linear-gradient(135deg,#3a90b5,#1c4f63)"
-                  title="Teal"
-                ></span>
-                <span
-                  class="color-dot"
-                  style="background: #f0ede8"
-                  data-color="#f0ede8"
-                  data-gradient="linear-gradient(135deg,#fafafa,#dedad4)"
-                  title="Ivory"
-                ></span>
-                <span
-                  class="color-dot"
-                  style="background: #7b3f6e"
-                  data-color="#7b3f6e"
-                  data-gradient="linear-gradient(135deg,#9e5490,#5a2d52)"
-                  title="Plum"
+                  style="background: #ff3dae"
+                  data-color="#080808"
+                  data-gradient="linear-gradient(135deg,#1a1a1a,#080808)"
+                  title="Black"
                 ></span>
               </div>
               <button
                 class="add-btn"
-                data-name="Draped Midi Dress"
+                data-name="Asymmetric Bodysuit"
                 data-price=""
               >
                 Add to Cart
               </button>
             </div>
-          </div> -->
+          </div>
+          <div
+            class="prod-card reveal"
+            data-cat="setc"
+            data-name="asymmetric bodysuit"
+          >
+            <div class="prod-img">
+              <div class="prod-ph">
+                <i class="fas fa-image"></i><span><img src="sc3.jpeg" alt=""></span>
+              </div>
+              <div class="prod-badge">NEW</div>
+              <div class="prod-overlay">
+                <button
+                  class="q-add"
+                  data-name="Asymmetric Bodysuit"
+                  data-price=""
+                >
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl"></p>
+              <h3 class="prod-name">set camélia</h3>
+              <p class="prod-price">79,900dt</p>
+              <div class="color-swatches">
+                <span
+                  class="color-dot"
+                  style="background: #000000"
+                  data-color="#1a1a2e"
+                  data-gradient="linear-gradient(135deg,#252545,#0d0d1a)"
+                  title="Midnight"
+                ></span>
+              </div>
+              <button
+                class="add-btn"
+                data-name="Asymmetric Bodysuit"
+                data-price=""
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+          <div
+            class="prod-card reveal"
+            data-cat="setc"
+            data-name="asymmetric bodysuit"
+          >
+            <div class="prod-img">
+              <div class="prod-ph">
+                <i class="fas fa-image"></i><span><img src="sc4.jpeg" alt=""></span>
+              </div>
+              <div class="prod-badge">NEW</div>
+              <div class="prod-overlay">
+                <button
+                  class="q-add"
+                  data-name="Asymmetric Bodysuit"
+                  data-price=""
+                >
+                  <i class="fas fa-shopping-bag"></i> Quick Add
+                </button>
+              </div>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat-lbl"></p>
+              <h3 class="prod-name">set camélia</h3>
+              <p class="prod-price">79,900dt</p>
+              <div class="color-swatches">
+                <span
+                  class="color-dot"
+                  style="background: #723300"
+                  data-color="#c8102e"
+                  data-gradient="linear-gradient(135deg,#e0243f,#9a0b22)"
+                  title="Red"
+                ></span>
+              </div>
+              <button
+                class="add-btn"
+                data-name="Asymmetric Bodysuit"
+                data-price=""
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
 
-          <!-- Product 5 -->
-          
-
-          <!-- Product 6 -->
+          <!-- Product 6 : Jebba l'Aid Courte -->
           <div
             class="prod-card reveal"
             data-cat="men"
             data-name="tailored blazer"
           >
             <div class="prod-img">
-              <img src="jebba1.jpeg" alt="Tailored Blazer"
-                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class="fas fa-image">
-              
+              <img
+                src="jebba1.jpeg"
+                alt="Jebba l'Aid Courte"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\'fas fa-image\'></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
+              />
               <div class="prod-overlay">
                 <button class="q-add" data-name="Tailored Blazer" data-price="">
                   <i class="fas fa-shopping-bag"></i> Quick Add
@@ -2956,7 +2798,6 @@
                   data-gradient="linear-gradient(135deg,#2a2a2a,#080808)"
                   title="Charcoal"
                 ></span>
-                
               </div>
               <button class="add-btn" data-name="Tailored Blazer" data-price="50dt">
                 Add to Cart
@@ -2964,7 +2805,7 @@
             </div>
           </div>
 
-          <!-- Product 7 -->
+          <!-- Product 7 : Jebba l'Aid Longue -->
           <div
             class="prod-card reveal"
             data-cat="men"
@@ -2972,12 +2813,14 @@
           >
             <div class="prod-img">
               <div class="prod-ph">
-                <i class="fas fa-image"></i
-                ><span
-                  ><img src="jebba3.png" alt="Strappy Heeled Sandals"
-                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class="fas fa-image">
+                <i class="fas fa-image"></i><span>
+                  <img
+                    src="jebba3.png"
+                    alt="Jebba l'Aid Longue"
+                    onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\'fas fa-image\'></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
+                  />
+                </span>
               </div>
-             
               <div class="prod-overlay">
                 <button class="q-add" data-name="Slim-Fit Chinos" data-price="">
                   <i class="fas fa-shopping-bag"></i> Quick Add
@@ -2996,7 +2839,6 @@
                   data-gradient="linear-gradient(135deg,#d8c0a0,#a8906a)"
                   title="Khaki"
                 ></span>
-                
               </div>
               <button class="add-btn" data-name="Slim-Fit Chinos" data-price="">
                 Add to Cart
@@ -3004,16 +2846,18 @@
             </div>
           </div>
 
-          <!-- Product 8 -->
+          <!-- Product 8 : Robe marine -->
           <div
             class="prod-card reveal"
             data-cat="shoes"
             data-name="strappy heeled sandals"
           >
             <div class="prod-img">
-              <img src="robe2.png" alt="Strappy Heeled Sandals"
-                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class="fas fa-image">
-              
+              <img
+                src="robe2.png"
+                alt="Robe marine"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\'fas fa-image\'></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
+              />
               <div class="prod-overlay">
                 <button
                   class="q-add"
@@ -3036,7 +2880,6 @@
                   data-gradient="linear-gradient(135deg,#e4c97a,#9e7a28)"
                   title="Gold"
                 ></span>
-                
               </div>
               <button
                 class="add-btn"
@@ -3048,16 +2891,18 @@
             </div>
           </div>
 
-          <!-- Product 9 -->
+          <!-- Product 9 : Robe marine -->
           <div
             class="prod-card reveal"
             data-cat="shoes"
             data-name="pointed-toe mules"
           >
             <div class="prod-img">
-              <img src="robe11.jpg" alt="Pointed-Toe Mules"
-                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class="fas fa-image">
-              
+              <img
+                src="robe11.jpg"
+                alt="Robe marine"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\'fas fa-image\'></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
+              />
               <div class="prod-overlay">
                 <button
                   class="q-add"
@@ -3079,9 +2924,7 @@
                   data-color="#c4a882"
                   data-gradient="linear-gradient(135deg,#d8c0a0,#a8906a)"
                   title="Nude"
-                >
-                </span>
-                
+                ></span>
               </div>
               <button
                 class="add-btn"
@@ -3093,17 +2936,18 @@
             </div>
           </div>
 
-          <!-- Product 10 -->
-          
+          <!-- Product 10 : Gold Chain Belt / Set d'été (set3.jpeg) -->
           <div
             class="prod-card reveal"
             data-cat="accessories"
             data-name="gold chain belt"
           >
             <div class="prod-img">
-              <img src="set3.jpeg" alt="Gold Chain Belt"
-                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class="fas fa-image">
-              
+              <img
+                src="set3.jpeg"
+                alt="Set d'été"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\'fas fa-image\'></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
+              />
               <div class="prod-overlay">
                 <button class="q-add" data-name="Gold Chain Belt" data-price="">
                   <i class="fas fa-shopping-bag"></i> Quick Add
@@ -3122,21 +2966,25 @@
                   data-gradient="linear-gradient(135deg,#e4c97a,#9e7a28)"
                   title="Gold"
                 ></span>
-                
               </div>
               <button class="add-btn" data-name="Gold Chain Belt" data-price="">
                 Add to Cart
               </button>
             </div>
-          </div> 
-          <!-- Product 11 -->
+          </div>
+
+          <!-- Product 11 : Gold Chain Belt / Set d'été (set11.jpeg) — the card that was broken -->
           <div
             class="prod-card reveal"
             data-cat="accessories"
             data-name="gold chain belt"
           >
             <div class="prod-img">
-              <img src="set11.jpeg" alt="Gold Chain Belt" onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\"fas fa-image\">
+              <img
+                src="set11.jpeg"
+                alt="Set d'été"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\'fas fa-image\'></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
+              />
               <div class="prod-overlay">
                 <button class="q-add" data-name="Gold Chain Belt" data-price="">
                   <i class="fas fa-shopping-bag"></i> Quick Add
@@ -3155,7 +3003,6 @@
                   data-gradient="linear-gradient(135deg,#e4c97a,#9e7a28)"
                   title="Gold"
                 ></span>
-                
               </div>
               <button class="add-btn" data-name="Gold Chain Belt" data-price="">
                 Add to Cart
@@ -3163,15 +3010,18 @@
             </div>
           </div>
 
-          <!-- Product 12 -->
+          <!-- Product 12 : Silk Scarf / Set d'été (set2.jpeg) -->
           <div
             class="prod-card reveal"
             data-cat="accessories"
             data-name="silk scarf"
           >
             <div class="prod-img">
-              <img src="set2.jpeg" alt="Silk Scarf"
-                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class="fas fa-image">
+              <img
+                src="set2.jpeg"
+                alt="Set d'été"
+                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\'fas fa-image\'></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
+              />
               <div class="prod-overlay">
                 <button class="q-add" data-name="Silk Scarf" data-price="">
                   <i class="fas fa-shopping-bag"></i> Quick Add
@@ -3190,7 +3040,6 @@
                   data-gradient="linear-gradient(135deg,#e0243f,#9a0b22)"
                   title="Red"
                 ></span>
-                
               </div>
               <button class="add-btn" data-name="Silk Scarf" data-price="">
                 Add to Cart
@@ -3208,8 +3057,11 @@
       <div class="about-inner">
         <div class="about-visual reveal">
           <div class="about-ph">
-            <img src="logo.jpeg" alt="AZ Collection"
-                onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class="fas fa-image">
+            <img
+              src="logo.jpeg"
+              alt="AZ Collection"
+              onerror="this.onerror=null;this.style.display='none';var ph=document.createElement('div');ph.className='prod-ph';ph.innerHTML='<i class=\'fas fa-image\'></i><span>'+this.alt+'</span>';this.parentNode.insertBefore(ph,this.nextSibling);"
+            />
           </div>
           <div class="about-box"></div>
         </div>
@@ -3278,20 +3130,18 @@
             </div>
           </div>
           <div class="c-social">
-            </i>
-              <a href="https://www.instagram.com/az_collection_2026" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="https://www.tiktok.com/@abirzahrouni2" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-                <i class="fab fa-tiktok"></i>
+            <a href="https://www.instagram.com/az_collection_2026" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
             </a>
-            
-              <a href="https://www.facebook.com/abirzahrounii" target="_blank" rel="noopener noreferrer" aria-label="facebook">
-                <i class="fab fa-facebook-f"></i>
+            <a href="https://www.tiktok.com/@abirzahrouni2" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+              <i class="fab fa-tiktok"></i>
             </a>
-           
-              <a href="https://wa.me/21653953093" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i>
-              </a>
+            <a href="https://www.facebook.com/abirzahrounii" target="_blank" rel="noopener noreferrer" aria-label="facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://wa.me/21653953093" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
           </div>
         </div>
         <form class="c-form reveal" onsubmit="handleContact(event)">
@@ -3333,17 +3183,14 @@
           </div>
           <p>Luxury fashion for the modern era.<br />Wear your story.</p>
           <div class="foot-social">
-            <a href="#" aria-label="Instagram"
+            <a href="https://www.instagram.com/az_collection_2026" aria-label="Instagram"
               ><i class="fab fa-instagram"></i
             ></a>
-            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-            <a href="#" aria-label="Facebook"
+            <a href="https://www.tiktok.com/@abirzahrouni2" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.facebook.com/abirzahrounii" aria-label="Facebook"
               ><i class="fab fa-facebook-f"></i
             ></a>
-            <a href="#" aria-label="Pinterest"
-              ><i class="fab fa-pinterest-p"></i
-            ></a>
-            <a href="#" aria-label="WhatsApp"
+            <a href="https://wa.me/21653953093" aria-label="WhatsApp"
               ><i class="fab fa-whatsapp"></i
             ></a>
           </div>
@@ -3352,10 +3199,6 @@
           <h4>Shop</h4>
           <ul>
             <li><a href="#shop">New Arrivals</a></li>
-            <li><a href="#shop">top</a></li>
-            <li><a href="#shop">jebba l'Aid</a></li>
-            <li><a href="#shop">Robe marine</a></li>
-            <li><a href="#shop">Set d'été</a></li>
           </ul>
         </div>
         <div class="foot-col">
@@ -3365,7 +3208,7 @@
             <li><a href="#">Shipping &amp; Returns</a></li>
             <li><a href="#">FAQ</a></li>
             <li><a href="#">Care Instructions</a></li>
-            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="contact">Contact Us</a></li>
           </ul>
         </div>
         <div class="foot-col">
@@ -3415,6 +3258,24 @@
         </button>
       </div>
     </aside>
+    <!-- ===== CHECKOUT MODAL ===== -->
+    <div class="cart-mask" id="checkoutMask"></div>
+    <div class="checkout-modal" id="checkoutModal">
+    <div class="checkout-top">
+    <h2>Finaliser la commande</h2>
+    <button class="cart-close-btn" id="checkoutCloseBtn"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="checkout-body">
+    <input class="f-ctrl" type="text" id="custFirstName" placeholder=" (Prénom)" required />
+    <input class="f-ctrl" type="text" id="custLastName" placeholder=" (Nom)" required />
+    <input class="f-ctrl" type="email" id="custEmail" placeholder="Email" required />
+    <input class="f-ctrl" type="tel" id="custPhone" placeholder="Téléphone (optionnel)" />
+    <button class="btn btn-gold w-full" id="sendOrderBtn">
+      Envoyer la commande <i class="fab fa-whatsapp"></i>
+    </button>
+    <p class="checkout-note">pour commande contacter sur WhatsApp</p>
+  </div>
+</div>
 
     <!-- Toast -->
     <div class="toast" id="toast"></div>
@@ -3553,13 +3414,20 @@
       }
 
       /* =========================================
-   ADD TO CART — delegated
+   ADD TO CART — delegated (single handler)
    ========================================= */
       document.addEventListener("click", (e) => {
         const btn = e.target.closest(".add-btn, .q-add");
         if (!btn) return;
-        const name = btn.dataset.name;
-        const price = btn.dataset.price || "";
+        const card = btn.closest(".prod-card");
+        const nameEl = card?.querySelector(".prod-name");
+        const catEl = card?.querySelector(".prod-cat-lbl");
+        const priceEl = card?.querySelector(".prod-price");
+        const name =
+          nameEl?.textContent.trim() ||
+          catEl?.textContent.trim() ||
+          btn.dataset.name;
+        const price = priceEl?.textContent.trim() || btn.dataset.price || "";
         addItem(name, price);
       });
 
@@ -3639,7 +3507,7 @@
           cartTotal.textContent = "—";
         } else {
           const sum = cart.reduce((s, i) => {
-            const n = parseFloat(i.price.replace(/[^0-9.]/g, "")) || 0;
+            const n = parseFloat(i.price.replace(/[^0-9.]/g, ",")) || 0;
             return s + n * i.qty;
           }, 0);
           const sym =
@@ -3792,6 +3660,50 @@
             (s) => (s.style.color = "rgba(255,255,255,0.4)")
           );
         }
+      });
+
+      /* ===== CHECKOUT — إرسال الطلبية عبر WhatsApp ===== */
+      const checkoutMask = document.getElementById("checkoutMask");
+      const checkoutModal = document.getElementById("checkoutModal");
+      const checkoutCloseBtn = document.getElementById("checkoutCloseBtn");
+      const sendOrderBtn = document.getElementById("sendOrderBtn");
+      const checkoutTriggerBtn = document.querySelector("#cartFoot .btn-gold");
+
+      checkoutTriggerBtn.addEventListener("click", () => {
+        if (!cart.length) return;
+        closeCart();
+        checkoutMask.classList.add("on");
+        checkoutModal.classList.add("on");
+      });
+      function closeCheckout() {
+        checkoutMask.classList.remove("on");
+        checkoutModal.classList.remove("on");
+      }
+      checkoutCloseBtn.addEventListener("click", closeCheckout);
+      checkoutMask.addEventListener("click", closeCheckout);
+
+      sendOrderBtn.addEventListener("click", () => {
+        const firstName = document.getElementById("custFirstName").value.trim();
+        const lastName = document.getElementById("custLastName").value.trim();
+        const email = document.getElementById("custEmail").value.trim();
+        const phone = document.getElementById("custPhone").value.trim();
+
+        if (!firstName || !lastName || !email) {
+          showToast("Merci de remplir prenome , nome et Email");
+          return;
+        }
+
+        let msg = `🛍️ *Nouvelle Commande - AZ Collection*\n\n`;
+        msg += `👤 prenome: ${firstName}\n👤 nome: ${lastName}\n📧 Email: ${email}\n`;
+        if (phone) msg += `📞 Tél: ${phone}\n`;
+        msg += `\n*Articles:*\n`;
+        cart.forEach((item) => {
+          msg += `• ${item.name} x${item.qty} — ${item.price || "prix sur demande"}\n`;
+        });
+        msg += `\n💰 Total: ${cartTotal.textContent}`;
+
+        window.open(`https://wa.me/21653953093?text=${encodeURIComponent(msg)}`, "_blank");
+        closeCheckout();
       });
 
       // Init
